@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -15,6 +13,9 @@ import { AkomodasiComponent } from './akomodasi/akomodasi.component';
 import { DinasComponent } from './dinas/dinas.component';
 import { AgentComponent } from './agent/agent.component';
 import { AdminComponent } from './admin/admin.component';
+import { from } from 'rxjs';
+import { LoginComponent } from './admin/login/login.component';
+import { AuthService } from './admin/auth.service';
 
 @NgModule({
   declarations: [
@@ -27,12 +28,12 @@ import { AdminComponent } from './admin/admin.component';
     DinasComponent,
     AgentComponent,
     AdminComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    MatButtonModule,MatCheckboxModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       {path: 'kuliner', component: KulinerComponent},
@@ -41,9 +42,10 @@ import { AdminComponent } from './admin/admin.component';
       {path: 'destinasi', component: DestinasiComponent},
       {path: 'agen', component: AgentComponent},
       {path: 'admin', component: AdminComponent},
+      {path: 'login', component: LoginComponent},
     ])
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

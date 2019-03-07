@@ -1,1 +1,191 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+$color-blue1: #2b5797;
+$color-blue2: #2d89ef;
+$color-orange2:#e3a21a;
+$color-orange1:#da532c;
+$color-greeen2:#99b433;
+$color-greeen1:#00a300;
+
+@media (max-width: 767px) {
+
+  /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+  .body-content {
+    padding-top: 50px;
+  }
+
+  .panel {
+    position: relative;
+    padding: 5px;
+  }
+
+  .items {
+    .item {
+      min-height: 85px !important;
+
+      img {
+        position: absolute;
+        height: 100% !important;
+        width: 100px !important;
+      }
+
+      .content {
+        margin-left: 100px !important;
+        padding: 10px;
+      }
+    }
+  }
+}
+
+
+.header {
+  position: relative;
+  padding: 0px !important;
+  .title {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+  }
+  img {
+    width: 100%;
+    height: 500px;
+  }
+}
+
+.label-content{
+  margin-top:10px;
+  }
+
+.label{
+  display: inline;
+  padding: 5px;
+  padding-right: 15px;
+}
+
+.label-orange{
+  background-color: $color-orange2;
+  display: inline;
+  padding: 5px;
+  padding-right: 15px;
+}
+
+.label-blue{
+  background-color: $color-blue2;
+  display: inline;
+  padding: 5px;
+  padding-right: 15px;
+}
+
+
+.label-green{
+  background-color: $color-greeen2;
+  display: inline;
+  padding: 5px;
+  padding-right: 15px;
+}
+
+.orange {
+  .titleText {
+    background-color: $color-orange1;
+  }
+
+  .panelline {
+    border-top-color: $color-orange2 !important;
+  }
+}
+
+.blue {
+  .titleText {
+    background-color: $color-blue1;
+  }
+
+  .panelline {
+    border-top-color: $color-blue2 !important;
+  }
+}
+
+.green {
+  .titleText {
+    background-color: $color-greeen1;
+  }
+
+  .panelline {
+    border-top-color: $color-greeen2 !important;
+  }
+}
+
+.panel {
+  position: relative;
+  padding: 20px;
+
+  .panelTitle {
+    .titleText {
+      font-size: 17pt;
+      padding: 10px;
+      max-width: 200px;
+      color: white;
+    }
+
+    .panelline {
+      height: 1px;
+      border: 0;
+      padding: 0;
+      margin: 0px;
+      margin-bottom: 5px;
+      border-top: 3px solid;
+    }
+
+  }
+
+  .panelBody {
+    .title {
+      color: white;
+      font-size: 30px;
+      padding: 25px;
+      position: absolute;
+      top: 0px;
+      text-shadow: whitesmoke;
+    }
+  }
+}
+
+.imgBody {
+  position: relative;
+  background-color: rgba(190, 236, 221, 0.418);
+
+  .titleItem {
+    padding: 5px;
+    position: absolute;
+    bottom: 2px;
+    height: auto;
+    color: white;
+  }
+
+  img {
+    width: 100%;
+    max-height: 400px;
+  }
+}
+
+.items {
+  position: relative;
+  
+  .item {
+    background-color: whitesmoke;
+    position: relative;
+    margin: 5px 0px 5px 0px;
+    min-height: 130px;
+
+    img {
+      position: absolute;
+      height: 100%;
+      width: 150px;
+    }
+
+    .content {
+      margin-left: 150px;
+      padding: 10px;
+    }
+  }
+}
