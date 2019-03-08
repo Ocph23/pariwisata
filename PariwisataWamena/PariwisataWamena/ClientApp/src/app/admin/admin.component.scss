@@ -1,0 +1,54 @@
+.panel{
+    width: 25%;
+    float: left;
+}
+
+  .imgBody{
+    img{height: 200px;}
+  }
+
+.adminContent{
+  position: relative;
+  padding: 10px;
+  height: 200px;
+  .dateItem{
+    position:absolute;
+    bottom: 0px;
+    padding: 10px;
+  }
+}
+
+
+.label{
+  font-size: 14px;
+}
+
+.addItem{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  .material-icons{
+    font-size: 80px;
+    color: rgb(3, 82, 3);
+    box-shadow: solid 10px gray;
+  }
+}
+
+
+.createArticle
+{
+  margin-top: 20px;
+  input{
+    margin-bottom: 10px;
+  }
+  textarea{
+    margin-bottom: 10px;
+    min-height: 450px;
+  }
+  .comandarea{
+    display: inline;
+    button{
+      margin-right: 5px;
+    }
+  }
+}

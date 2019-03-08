@@ -15,21 +15,10 @@ namespace PariwisataWamena.Services
     public interface IUserService
     {
        Task<User> Authenticate(string username, string password);
-        IEnumerable<User> GetAll();
     }
 
     public class UserService : IUserService
     {
-        // users hardcoded for simplicity, store in a db with hashed passwords in production applications
-        private List<User> _users = new List<User>
-        {
-
-          
-            new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" }
-        };
-
-
-
         private readonly AppSettings _appSettings;
 
         public UserService(IOptions<AppSettings> appSettings)
@@ -42,10 +31,10 @@ namespace PariwisataWamena.Services
         {
             using (var db = new DbContext())
             {
-                var u = new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" };
+              //  var u = new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" };
                 var users = await db.Users.FindAsync(FilterDefinition<User>.Empty);
 
-                var user =users.ToList().FirstOrDefault();
+                var user =users.ToList().Where(O=>O.Username==username && O.Password==password).FirstOrDefault();
             
            // var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
 
@@ -75,13 +64,5 @@ namespace PariwisataWamena.Services
             }
         }
 
-        public IEnumerable<User> GetAll()
-        {
-            // return users without passwords
-            return _users.Select(x => {
-                x.Password = null;
-                return x;
-            });
-        }
     }
 }
