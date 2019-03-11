@@ -13,12 +13,11 @@ export class AuthService {
     private http: HttpClient,
      @Inject('BASE_URL') private baseUrl: string,
       private router: Router) {
-
   }
 
 
  login() {
-  const user = {'UserName': 'test', 'Password': 'test'};
+  const user = {'UserName': 'ocph23', 'Password': 'sony@77'};
   const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'

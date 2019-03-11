@@ -25,6 +25,12 @@ import { AdminAkomodasiComponent } from './admin/admin-akomodasi/admin-akomodasi
 import { AdminAgentComponent } from './admin/admin-agent/admin-agent.component';
 import { AdminDestinasiComponent } from './admin/admin-destinasi/admin-destinasi.component';
 import { AdminAddArticleComponent } from './admin/admin-add-article/admin-add-article.component';
+import { DetailComponent } from './home/detail/detail.component';
+import { ModelsComponent } from './models/models.component';
+import { SearchComponent } from './search/search.component';
+import { FilterPipe } from './filter.pipe';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
 
 
 @NgModule({
@@ -47,12 +53,12 @@ import { AdminAddArticleComponent } from './admin/admin-add-article/admin-add-ar
     AdminAgentComponent,
     AdminDestinasiComponent,
     AdminAddArticleComponent,
-    
+    DetailComponent, ModelsComponent, SearchComponent, FilterPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,FroalaEditorModule.forRoot(), FroalaViewModule.forRoot() ,
+    HttpClientModule,AngularEditorModule,
+    FormsModule,
     RouterModule.forRoot([
       {path: '', redirectTo: 'home/main', pathMatch: 'full'},
       {path: 'home', redirectTo: 'home/main'},
@@ -64,6 +70,7 @@ import { AdminAddArticleComponent } from './admin/admin-add-article/admin-add-ar
           { path: 'dinas', component: DinasComponent },
           { path: 'destinasi', component: DestinasiComponent },
           { path: 'agen', component: AgentComponent },
+          { path: 'detail',  component: DetailComponent,data:null},
         ]
       },
       { path: 'admin', component: AdminComponent , children: [

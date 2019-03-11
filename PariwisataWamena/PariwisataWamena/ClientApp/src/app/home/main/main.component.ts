@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { ArticleService } from '../article.service';
+import { Article, ArticleType, PanelArticle } from 'src/app/models/models.component';
+import { from } from 'rxjs';
+import { delay } from 'q';
+import { DetailComponent } from '../detail/detail.component';
 
 @Component({
   selector: 'app-main',
@@ -8,10 +13,19 @@ import { Router } from '@angular/router';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dataService: ArticleService, private router: Router) {
+    dataService.get();
 
-  ngOnInit() {
+   }
 
+  async ngOnInit() {
+await delay(3000);
+  }
+
+
+  public onSelectArticle(data) {
+    this.dataService.currentArticle = data;
+    this.router.navigate(['/home/detail']);
   }
 
 }

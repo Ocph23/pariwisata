@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PariwisataWamena", "PariwisataWamena\PariwisataWamena.csproj", "{10CC1ABC-37D7-4C77-AABB-FE364857219F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PariwisataWamena", "PariwisataWamena\PariwisataWamena.csproj", "{10CC1ABC-37D7-4C77-AABB-FE364857219F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocph.DAL.Core", "..\..\OcphDAL\Ocph.DAL.Core\Ocph.DAL.Core.csproj", "{2BAF4599-7D9B-4073-9578-E2FE7777DD30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{10CC1ABC-37D7-4C77-AABB-FE364857219F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10CC1ABC-37D7-4C77-AABB-FE364857219F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10CC1ABC-37D7-4C77-AABB-FE364857219F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BAF4599-7D9B-4073-9578-E2FE7777DD30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BAF4599-7D9B-4073-9578-E2FE7777DD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BAF4599-7D9B-4073-9578-E2FE7777DD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BAF4599-7D9B-4073-9578-E2FE7777DD30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

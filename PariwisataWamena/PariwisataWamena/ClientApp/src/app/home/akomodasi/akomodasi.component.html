@@ -1,1 +1,32 @@
-AKOMODASI
+<div class="header">
+    <img src="././assets/images/resort1.jpg">
+    <div class="search">
+      <app-search></app-search>
+    </div>
+    <div class="title">
+      <div style="text-align:center">
+        <strong>AKOMODASI</strong>
+      </div>
+    </div>
+  </div>
+
+<div class="panel">
+    
+    <div class="panelBody">
+    
+      <div class="items">
+        <div class="item" *ngFor="let item of Kuliners">
+          <img src="././assets/images/makanan2.jpg">
+          <div class="content">
+            <h5>{{ item.title }}</h5>
+            <div class="label label-orange">
+              <span>Kuliner</span>
+            </div>
+            <div class="label-content">{{item.content}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>

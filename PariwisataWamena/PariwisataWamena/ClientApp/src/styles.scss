@@ -4,6 +4,8 @@ $color-orange2:#e3a21a;
 $color-orange1:#da532c;
 $color-greeen2:#99b433;
 $color-greeen1:#00a300;
+$color-purple1:#7e3878;
+$color-purple2:#9f00a7;
 
 @media (max-width: 767px) {
 
@@ -35,6 +37,11 @@ $color-greeen1:#00a300;
   }
 }
 
+.search{
+  position: absolute;
+  right: 5px;
+  bottom: 40px;
+}
 
 .header {
   position: relative;
@@ -61,6 +68,7 @@ $color-greeen1:#00a300;
   display: inline;
   padding: 5px;
   padding-right: 15px;
+  color: white;
 }
 
 .label-orange{
@@ -80,6 +88,14 @@ $color-greeen1:#00a300;
 
 .label-green{
   background-color: $color-greeen2;
+  display: inline;
+  padding: 5px;
+  padding-right: 15px;
+}
+
+
+.label-purple{
+  background-color: $color-purple2;
   display: inline;
   padding: 5px;
   padding-right: 15px;
@@ -112,6 +128,16 @@ $color-greeen1:#00a300;
 
   .panelline {
     border-top-color: $color-greeen2 !important;
+  }
+}
+
+.purple{
+  .titleText {
+    background-color: $color-purple1;
+  }
+
+  .panelline {
+    border-top-color: $color-purple2 !important;
   }
 }
 

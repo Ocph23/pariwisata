@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Article } from 'src/app/models/models.component';
 
 @Component({
   selector: 'app-admin-add-article',
@@ -17,15 +18,4 @@ public article:Article;
       });
   }
 
-}
-
-
-export interface Article{
-  Type: ArticleType;
-  Title:string;
-  Content:string;
-}
-
-export enum ArticleType{
-  Kuliner, Akomodasi, Destinasi 
 }

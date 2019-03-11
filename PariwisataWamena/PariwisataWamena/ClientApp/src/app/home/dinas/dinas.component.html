@@ -1,3 +1,31 @@
-<p>
-  dinas works!
-</p>
+<div class="header">
+    <img src="././assets/images/cover6.jpg">
+    <div class="search">
+      <app-search></app-search>
+    </div>
+    <div class="title">
+      <div style="text-align:center">
+        <strong>DINAS</strong> 
+      </div>
+    </div>
+  </div>
+
+  
+
+<div class="container">
+  <div class="row">
+   
+    <div class="col-md-2 dinasMenu">
+      <button (click)="onClickProfile()">Profile</button>
+      <button (click)="onClickVisiMisi()">Visi Dan Misi</button>
+      <button (click)="onClickStruktur()">Struktur</button>
+      <button (click)="onClickKontak()">Kontak</button>
+    </div>
+    <div class="col-md-10 dinasContent">
+        <h2>{{page.contentTitle}}</h2>
+        <div>
+          {{page.contentBody}}
+        </div>
+      </div>
+  </div>
+</div>

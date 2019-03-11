@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
-import { ArticleParameter, ArticleType } from '../admin-add-article/admin-add-article.component';
 import { ArrayType } from '@angular/compiler';
+import { Article } from 'src/app/models/models.component';
 
 @Component({
   selector: 'app-admin-akomodasi',
@@ -12,7 +12,7 @@ import { ArrayType } from '@angular/compiler';
 
 
 export class AdminAkomodasiComponent implements OnInit {
-private data: ArticleParameter;
+private data: Article;
   constructor(private router: Router) { }
 
   ngOnInit() {

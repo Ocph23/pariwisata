@@ -9,7 +9,13 @@
 <div class="row">
   <div class="col-md-10">
     <div class="dinasContent">
-      <h2>Judul</h2>
+
+      <label class="label">Judul</label>
+      <input placeholder="title" class="form-control" [(ngModel)]="model.title">
+
+      <angular-editor [(ngModel)]="model.content" [config]="editorConfig"></angular-editor>
+      <button>Publis</button>
+      <button>Save As Draf</button>
     </div>
   </div>
   <div class="col-md-2">

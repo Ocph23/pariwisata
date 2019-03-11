@@ -1,15 +1,39 @@
+using System; 
 using System.Collections.Generic;
-namespace PariwisataWamena.Models
-{
-    public class Article
-    {
-        public string Title{get;set;}
-        public List<string> Categories { get; set; }
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Ocph.DAL;
+ 
+ namespace PariwisataWamena.Models 
+{ 
+     [TableName("article")] 
+     public class article   
+   {
+          [PrimaryKey("idarticle")] 
+          [DbColumn("idarticle")] 
+          public int idarticle {  get; set;} 
 
-        public string Content { get; set; }
+          [DbColumn("title")] 
+          public string title {  get; set;} 
 
-        public string Foto { get; set; }
+          [DbColumn("content")] 
+          public string content {  get; set;} 
 
-        
+          [DbColumn("type")] 
+          public string type {  get; set;} 
+
+          [DbColumn("createdate")] 
+          public DateTime createdate {  get; set;} 
+
+          [DbColumn("thumb")] 
+          public byte[] thumb {  get; set;} 
+
+          [DbColumn("iduser")] 
+          public int iduser {  get; set;}
+           public IEnumerable<string> tags { get;  set; }
+         public user user { get; set; }
     }
 }
+
+

@@ -23,11 +23,11 @@ namespace PariwisataWamena.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public async Task<IActionResult> AuthenticateAsync([FromBody]User userParam)
+        public async Task<IActionResult> AuthenticateAsync([FromBody]user userParam)
         {
             try
             {
-                var user = await _userService.Authenticate(userParam.Username, userParam.Password);
+                var user = await _userService.Authenticate(userParam.username, userParam.password);
 
                 if (user == null)
                     return BadRequest(new { message = "Username or password is incorrect" });

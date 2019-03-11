@@ -1,34 +1,31 @@
+<div class="header">
+  <img src="././assets/images/kuliner5.jpg">
+  <div class="search">
+    <app-search   (searchEvent)="onReciviedSearch($event)"></app-search>
+  </div>
+  <div class="title">
+    <div style="text-align:center">
+      <strong>KULINER</strong>
+    </div>
+  </div>
+</div>
 
 <div class="panel">
-    <div class="panelTitle orange">
-      <div class="titleText">
-        KULINER
-      </div>
-      <hr class="panelline" />
-    </div>
-    <div class="panelBody">
-      <div class="imgBody">
-        <img src="././assets/images/makanan1.jpg">
-        <div class="title">
-          <strong> Warung Makan Aman</strong>
-        </div>
-        <div class="titleItem">
-          1 Minute Ago <span><strong>Admin</strong></span>
-        </div>
-      </div>
-      <div class="items">
-        <div class="item" *ngFor="let item of Kuliners">
-          <img src="././assets/images/makanan2.jpg">
-          <div class="content">
-            <h5>{{ item.title }}</h5>
-            <div class="label label-orange">
-              <span>Kuliner</span>
-            </div>
-            <div class="label-content">{{item.content}}</div>
+
+  <div class="panelBody">
+    <div class="items">
+      <div class="item" *ngFor="let item of Kuliners  | filter : searchText">
+        <img src="././assets/images/makanan2.jpg">
+        <div class="content">
+          <h5>{{ item.title }}</h5>
+          <div class="label label-orange">
+            <span>Kuliner</span>
           </div>
+          <div class="label-content">{{item.content}}</div>
         </div>
       </div>
     </div>
-
-
   </div>
+
+
+</div>

@@ -1,72 +1,90 @@
 <h2>KULINER</h2>
 <div class="adminpanel">
-    <div class="row panel">
-        <div class="panelBody">
-          <div class="imgBody">
-            <img src="././assets/images/makanan1.jpg">
-            <div class="title">
-                <div class="label label-blue">
-                    <span>Publish</span>
-                  </div>
-            </div>
-            <div class="titleItem">
-                <h6>Judul</h6>
-            </div>
-          </div>
-          <div class="items">
-            <div class="item">
-              <div class="adminContent">
-              
-                <div class="label-content"> ini adalah content dari isi</div>
-                <div class="dateItem">
-                    1 Minute Ago <span><strong>Admin</strong></span>
-                  </div>
+  <div class="row">
+    <div class="panel">
+      <div class="panelBody">
+        
+        <div class="imgBody">
 
+
+          <img src="././assets/images/makanan1.jpg">
+
+       
+
+
+          <div class="title">
+            <div class="label label-blue">
+              <span>Publish</span>
+           
+            </div>
+         
+          </div>
+
+
+
+          <div class="titleItem">
+            <h6>Judul</h6>
+          </div>
+          <div class="panelMenu">
+              <button  (click)="toggleCollapse()" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </button>
+              <div class="dropdown-menu" [class.show]="show" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button">Action</button>
+                <button class="dropdown-item" type="button">Another action</button>
+                <button class="dropdown-item" type="button">Something else here</button>
               </div>
             </div>
-          
-          </div>
         </div>
-</div>
+     
 
-<div class="adminpanel">
-    <div class="row panel">
-        <div class="panelBody">
-          <div class="imgBody">
-            <img src="././assets/images/makanan1.jpg">
-            <div class="title">
-                <div class="label label-orange">
-                    <span>Draf</span>
-                  </div>
-            </div>
-            <div class="titleItem">
-                <h6>Judul</h6>
-            </div>
-          </div>
-          <div class="items">
-            <div class="item">
-              <div class="adminContent">
-              
-                <div class="label-content"> ini adalah content dari isi</div>
-                <div class="dateItem">
-                    1 Minute Ago <span><strong>Admin</strong></span>
-                  </div>
+        <div class="items">
+          <div class="item">
+            <div class="adminContent">
 
+              <div class="label-content"> ini adalah content dari isi</div>
+              <div class="dateItem">
+                1 Minute Ago <span><strong>Admin</strong></span>
               </div>
+
             </div>
-          
+          </div>
+
+        </div>
+      </div>
+      
+    </div>
+    <div class="panel">
+      <div class="panelBody">
+        <div class="imgBody">
+          <img src="././assets/images/makanan1.jpg">
+          <div class="title">
+            <div class="label label-blue">
+              <span>Publish</span>
+            </div>
+          </div>
+          <div class="titleItem">
+            <h6>Judul</h6>
           </div>
         </div>
-    
-    
-</div>
+        <div class="items">
+          <div class="item">
+            <div class="adminContent">
 
+              <div class="label-content"> ini adalah content dari isi</div>
+              <div class="dateItem">
+                1 Minute Ago <span><strong>Admin</strong></span>
+              </div>
 
+            </div>
+          </div>
 
+        </div>
+      </div>
+    </div>
+  </div>
 
-
-
-
-<div class="addItem">
+  <div class="addItem">
     <i class="material-icons btn" (click)="tets()">add_circle</i>
+  </div>
 </div>

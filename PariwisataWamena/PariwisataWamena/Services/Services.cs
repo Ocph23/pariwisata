@@ -10,59 +10,58 @@ using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using PariwisataWamena.Models;
 
-namespace PariwisataWamena.Services
-{
-    public interface IUserService
-    {
-       Task<User> Authenticate(string username, string password);
+namespace PariwisataWamena.Services {
+    public interface IUserService {
+        Task<user> Authenticate (string username, string password);
     }
 
-    public class UserService : IUserService
-    {
+    public class UserService : IUserService {
         private readonly AppSettings _appSettings;
 
-        public UserService(IOptions<AppSettings> appSettings)
-        {
+        public UserService (IOptions<AppSettings> appSettings) {
             _appSettings = appSettings.Value;
-           
+
         }
 
-        public async Task<User> Authenticate(string username, string password)
-        {
-            using (var db = new DbContext())
-            {
-              //  var u = new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" };
-                var users = await db.Users.FindAsync(FilterDefinition<User>.Empty);
-
-                var user =users.ToList().Where(O=>O.Username==username && O.Password==password).FirstOrDefault();
-            
-           // var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
-
-            // return null if user not found
-            if (user == null)
-                return null;
-
-            // authentication successful so generate jwt token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
+        public async Task<user> Authenticate (string username, string password) {
+            using (var db = new DbContext ()) {
+                try
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
+                    var user = db.Users.Where (O => O.username == username && O.password == password).FirstOrDefault ();
 
-            // remove password before returning
-            user.Password = null;
+                if (user == null)
+                    return null;
 
-            return user;
+                // authentication successful so generate jwt token
+                var tokenHandler = new JwtSecurityTokenHandler ();
+                var key = Encoding.ASCII.GetBytes (_appSettings.Secret);
+                var tokenDescriptor = new SecurityTokenDescriptor {
+                    Subject = new ClaimsIdentity (new Claim[] {
+                    new Claim (ClaimTypes.Name, user.iduser.ToString())
+                    }),
+                    Expires = DateTime.UtcNow.AddDays (7),
+                    SigningCredentials = new SigningCredentials (new SymmetricSecurityKey (key), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var token = tokenHandler.CreateToken (tokenDescriptor);
+                user.Token = tokenHandler.WriteToken (token);
+
+                // remove password before returning
+                user.password = null;
+                return user;
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SystemException(ex.Message);
+                }
             }
         }
 
     }
+
+
+
+
+
+
+
 }
