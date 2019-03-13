@@ -9,18 +9,17 @@
 <div class="row">
   <div class="col-md-10">
     <div class="dinasContent">
-
-      <label class="label">Judul</label>
-      <input placeholder="title" class="form-control" [(ngModel)]="model.title">
-
-      <angular-editor [(ngModel)]="model.content" [config]="editorConfig"></angular-editor>
-      <button>Publis</button>
-      <button>Save As Draf</button>
+      <h1>Test</h1>
+      <label class="label">{{Selected.title}}</label>
+      <input placeholder="title" class="form-control" [(ngModel)]="Selected.title">
+      <angular-editor [(ngModel)]="Selected.draft" [config]="editorConfig"></angular-editor>
+      <button (click)="save(Selected,'publish')">Publis</button>
+      <button (click)="save(Selected,'draf')">Save As Draf</button>
     </div>
   </div>
   <div class="col-md-2">
     <div class="dinasMenu">
-      <button>Profile</button>
+      <button (click)="getContent('profile')">Profile</button>
       <button>Visi Dan Misi</button>
       <button>Struktur</button>
       <button>Kontak</button>

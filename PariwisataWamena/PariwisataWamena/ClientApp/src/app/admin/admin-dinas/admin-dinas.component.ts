@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { article } from 'src/app/models/models.component';
+import { article, PanelArticle, ArticleType } from 'src/app/models/models.component';
+import { ArticleService } from 'src/app/home/article.service';
+import { AuthService } from 'src/app/authentification/auth.service';
 
 
 @Component({
@@ -32,15 +34,51 @@ export class AdminDinasComponent implements OnInit {
       },
     ]
   };
+  Data: PanelArticle;
+ public Selected: article={title:"Profile",draft:"type here"} as article;
 
-  public model:article;
-  constructor() {
+  constructor(
+    private auth: AuthService,
+    private dinasService:ArticleService,
+    @Inject("BASE_URL") private baseUrl: string
+  ) {
+    dinasService.get();
+  
+   
+  }
 
-    var m ={title:'profile', content:"ini context"};
-    this.model = m as article;
-
+  public getContent(title:string) {
+    if(this.dinasService.Dinas==null)
+       this.Selected = {title:title.toUpperCase(),draft:"type "+title+ " here ..."} as article;
+       else
+       {
+         this.Data=this.dinasService.Dinas;
+        var findx=this.Data.datas.find(x=>x.title==title);
+        if(findx!=null)
+        {
+          this.Selected=findx;
+        }else{
+          this.Selected = {title:title.toUpperCase(),draft:"type "+title+ " here ..."} as article;
+        }
+       }
 
   }
+
+  public save(data:article,status:string){
+    data.status=status;
+    if(status=="publish")
+    {
+      data.content=data.draft;
+    }
+    data.iduser=1;
+    data.type= ArticleType.Dinas;
+    this.dinasService.SaveArticle(data).then(x=>{
+      console.log('saved');
+
+    },error=>{console.log(error)});
+  }
+
+
 
   ngOnInit() {
   }

@@ -10,37 +10,49 @@ namespace PariwisataWamena.DataAccess
     {
         public Task<bool> Delete(int id)
         {
-           using( var db = new DbContext())
-           {
-               try
-               {
-                   var deleted = db.Article.Delete(x => x.idarticle ==id);
-                   return Task.FromResult(deleted);
-               }
-               catch (Exception ex)
-               {
-                   
-                   throw new SystemException(ex.Message) ;
-               }
-           }
+            using (var db = new DbContext())
+            {
+                try
+                {
+                    var deleted = db.Article.Delete(x => x.idarticle == id);
+                    return Task.FromResult(deleted);
+                }
+                catch (Exception ex)
+                {
+
+                    throw new SystemException(ex.Message);
+                }
+            }
         }
 
         public Task<IEnumerable<article>> Get()
         {
-            using(var db = new DbContext())
+            using (var db = new DbContext())
             {
                 try
                 {
                     var result = from a in db.Article.Select()
-                    join b in db.Users.Select()  on a.iduser equals b.iduser
-                    select new article { title=a.title, content= a.content,createdate=a.createdate,
-                    idarticle= a.idarticle,iduser= a.iduser,tags=a.tags,thumb=a.thumb,type=a.type, user=b };
+                                 join b in db.Users.Select() on a.iduser equals b.iduser
+                                 select new article
+                                 {
+                                     title = a.title,
+                                     content = a.content,
+                                     createdate = a.createdate,
+                                     status = a.status,
+                                     idarticle = a.idarticle,
+                                     iduser = a.iduser,
+                                     tags = a.tags,
+                                     thumb = a.thumb,
+                                     type = a.type,
+                                     user = b,
+                                     draft = a.draft
+                                 };
 
                     return Task.FromResult<IEnumerable<article>>(result.ToList());
                 }
                 catch (System.Exception)
                 {
-                    
+
                     throw;
                 }
             }
@@ -48,20 +60,32 @@ namespace PariwisataWamena.DataAccess
 
         public Task<article> Get(int id)
         {
-            using(var db = new DbContext())
+            using (var db = new DbContext())
             {
                 try
                 {
-                    var result = from a in db.Article.Where(x => x.idarticle==id)
-                    join b in db.Users.Select()  on a.iduser equals b.iduser
-                    select new article { title=a.title, content= a.content,createdate=a.createdate,
-                    idarticle= a.idarticle,iduser= a.iduser,tags=a.tags,thumb=a.thumb,type=a.type, user=b };
+                    var result = from a in db.Article.Where(x => x.idarticle == id)
+                                 join b in db.Users.Select() on a.iduser equals b.iduser
+                                 select new article
+                                 {
+                                     title = a.title,
+                                     content = a.content,
+                                     createdate = a.createdate,
+                                     status = a.status,
+                                     idarticle = a.idarticle,
+                                     iduser = a.iduser,
+                                     tags = a.tags,
+                                     thumb = a.thumb,
+                                     type = a.type,
+                                     user = b,
+                                     draft = a.draft
+                                 };
 
                     return Task.FromResult(result.FirstOrDefault());
                 }
                 catch (System.Exception)
                 {
-                    
+
                     throw;
                 }
             }
@@ -69,13 +93,13 @@ namespace PariwisataWamena.DataAccess
 
         public Task<article> Post(article t)
         {
-            using(var db = new DbContext())
+            using (var db = new DbContext())
             {
                 try
                 {
                     t.idarticle = db.Article.InsertAndGetLastID(t);
-                    if(t.idarticle<=0)
-                    throw new SystemException("Not Saved");
+                    if (t.idarticle <= 0)
+                        throw new SystemException("Not Saved");
                     return Task.FromResult(t);
                 }
                 catch (System.Exception ex)
@@ -87,14 +111,14 @@ namespace PariwisataWamena.DataAccess
 
         public Task<article> Put(int id, article t)
         {
-              using(var db = new DbContext())
+            using (var db = new DbContext())
             {
                 try
                 {
-                    t.idarticle = db.Article.InsertAndGetLastID(t);
-                    if(t.idarticle<=0)
+                    if (db.Article.Update(x => new { x.content, x.createdate, x.draft, x.iduser, x.status, x.thumb, x.title, x.type }, t, x => x.idarticle == id))
+                        return Task.FromResult(t);
+
                     throw new SystemException("Not Saved");
-                    return Task.FromResult(t);
                 }
                 catch (System.Exception ex)
                 {

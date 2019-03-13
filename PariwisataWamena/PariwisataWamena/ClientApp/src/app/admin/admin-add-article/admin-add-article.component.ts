@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Article } from 'src/app/models/models.component';
+import { article } from 'src/app/models/models.component';
 
 @Component({
   selector: 'app-admin-add-article',
@@ -8,12 +8,12 @@ import { Article } from 'src/app/models/models.component';
   styleUrls: ['../admin.component.scss', './admin-add-article.component.scss']
 })
 export class AdminAddArticleComponent implements OnInit {
-public article:Article;
+public article:article;
   constructor(private router: ActivatedRoute) { }
 
   ngOnInit() {
     const sub = this.router.params.subscribe(params => {
-     this.article=params as Article;
+     this.article=params as article;
      console.log(this.article);
       });
   }

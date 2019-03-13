@@ -12,7 +12,7 @@ namespace PariwisataWamena.Controllers {
         private ArticleDTO context = new ArticleDTO ();
         private UserDTO userContext = new UserDTO ();
 
-        [HttpGet ("[action]")]
+        [HttpGet]
         public async Task<IActionResult> Get () {
             try {
                 var result = await context.Get ();
@@ -24,7 +24,7 @@ namespace PariwisataWamena.Controllers {
             }
         }
 
-        [HttpGet ("[action]")]
+        [HttpGet ("id")]
         public async Task<IActionResult> Get (int id) {
             try {
 
@@ -38,10 +38,12 @@ namespace PariwisataWamena.Controllers {
             }
         }
 
-        [HttpPost ("[action]")]
+        [HttpPost]
         public async Task<IActionResult> Post (article model) {
             try {
 
+                if(model==null)
+                 throw new SystemException ("Not Saved");
                 var user = userContext.GetByUserName (User.Identity.Name);
                 model.createdate = DateTime.Now;
                 if (user != null) {
@@ -59,15 +61,19 @@ namespace PariwisataWamena.Controllers {
             }
         }
 
-        [HttpPut ("[action]")]
-        public async Task<IActionResult> Put (int id,article model) {
+       [HttpPut("{id}")]
+        public async Task<IActionResult> Put (int id,[FromBody] article item) {
             try {
+                if(id<=0 || item==null)
+                {
+                throw new SystemException ("model isnull");
+                }
 
                 var user = userContext.GetByUserName (User.Identity.Name);
-                model.createdate = DateTime.Now;
+                item.createdate = DateTime.Now;
                 if (user != null) {
-                    model.iduser = user.Id;
-                    var result = await context.Put(id,model);
+                    item.iduser = user.Id;
+                    var result = await context.Put(id,item);
 
                     return Ok (result);
                 }
@@ -81,8 +87,9 @@ namespace PariwisataWamena.Controllers {
 
 
         
-        [HttpDelete ("[action]")]
+       
         [Authorize]
+         [HttpDelete ("id")]
         public async Task<IActionResult> Delete (int id) {
             try {
                 var deleted = await context.Delete(id);

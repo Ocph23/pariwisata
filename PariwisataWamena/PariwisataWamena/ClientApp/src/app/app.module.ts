@@ -20,7 +20,6 @@ import { AuthentificationComponent } from './authentification/authentification.c
 import { MainComponent } from './home/main/main.component';
 import { AdminDinasComponent } from './admin/admin-dinas/admin-dinas.component';
 import { AdminKulinerComponent } from './admin/admin-kuliner/admin-kuliner.component';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { AdminAkomodasiComponent } from './admin/admin-akomodasi/admin-akomodasi.component';
 import { AdminAgentComponent } from './admin/admin-agent/admin-agent.component';
 import { AdminDestinasiComponent } from './admin/admin-destinasi/admin-destinasi.component';

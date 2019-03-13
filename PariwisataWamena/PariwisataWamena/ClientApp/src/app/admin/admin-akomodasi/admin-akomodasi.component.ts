@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { ArrayType } from '@angular/compiler';
-import { Article } from 'src/app/models/models.component';
+import { article } from 'src/app/models/models.component';
 
 @Component({
   selector: 'app-admin-akomodasi',
@@ -12,7 +12,7 @@ import { Article } from 'src/app/models/models.component';
 
 
 export class AdminAkomodasiComponent implements OnInit {
-private data: Article;
+private data: article;
   constructor(private router: Router) { }
 
   ngOnInit() {

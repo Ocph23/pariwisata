@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
+using PariwisataWamena.DataAccess;
 using PariwisataWamena.Models;
 
 namespace PariwisataWamena.Services {
@@ -24,12 +25,12 @@ namespace PariwisataWamena.Services {
         }
 
         public async Task<user> Authenticate (string username, string password) {
-            using (var db = new DbContext ()) {
-                try
-                {
-                    var user = db.Users.Where (O => O.username == username && O.password == password).FirstOrDefault ();
 
-                if (user == null)
+            var context = new UserDTO();
+            var result = await context.GetByUserName(username);
+            try
+                {
+                if (result == null || result.password!=password)
                     return null;
 
                 // authentication successful so generate jwt token
@@ -37,23 +38,22 @@ namespace PariwisataWamena.Services {
                 var key = Encoding.ASCII.GetBytes (_appSettings.Secret);
                 var tokenDescriptor = new SecurityTokenDescriptor {
                     Subject = new ClaimsIdentity (new Claim[] {
-                    new Claim (ClaimTypes.Name, user.iduser.ToString())
+                    new Claim (ClaimTypes.Name, result.iduser.ToString())
                     }),
                     Expires = DateTime.UtcNow.AddDays (7),
                     SigningCredentials = new SigningCredentials (new SymmetricSecurityKey (key), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken (tokenDescriptor);
-                user.Token = tokenHandler.WriteToken (token);
+                result.Token = tokenHandler.WriteToken (token);
 
                 // remove password before returning
-                user.password = null;
-                return user;
+                result.password = null;
+                return result;
                 }
                 catch (System.Exception ex)
                 {
                     throw new SystemException(ex.Message);
                 }
-            }
         }
 
     }

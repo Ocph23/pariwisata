@@ -1,7 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { ArticleService } from '../article.service';
-import { Article, ArticleType, PanelArticle } from 'src/app/models/models.component';
 import { from } from 'rxjs';
 import { delay } from 'q';
 import { DetailComponent } from '../detail/detail.component';

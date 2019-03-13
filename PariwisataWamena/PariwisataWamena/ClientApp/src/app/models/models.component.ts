@@ -15,7 +15,6 @@ export class ModelsComponent implements OnInit {
 
 }
 
-
 export interface PanelArticle {
   datas: article[];
   selected: article;
@@ -30,13 +29,16 @@ export interface article {
   thumb: string;
   iduser: number;
   tags: string[];
+  status:string;
+  draft:string;
   user: user;
 }
 
 export enum ArticleType {
   Kuliner = 'Kuliner',
   Akomodasi = 'Akomodasi',
-  Destinasi = 'Destinasi'
+  Destinasi = 'Destinasi',
+  Dinas='Dinas'
 }
 
 export interface user {
@@ -46,3 +48,4 @@ export interface user {
   avatar: string;
   Token: string;
 }
+

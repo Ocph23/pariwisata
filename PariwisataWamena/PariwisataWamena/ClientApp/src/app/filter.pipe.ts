@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Article } from './models/models.component';
+import { article } from './models/models.component';
 @Pipe({
     name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-    transform(items: Article[], searchText: string): any[] {
+    transform(items: article[], searchText: string): any[] {
         if (!items) { return []; }
         if (!searchText) { return items; }
         searchText = searchText.toLowerCase();

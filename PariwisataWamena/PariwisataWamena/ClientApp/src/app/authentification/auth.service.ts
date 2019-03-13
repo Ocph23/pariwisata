@@ -17,7 +17,7 @@ export class AuthService {
 
 
  login() {
-  const user = {'UserName': 'ocph23', 'Password': 'sony@77'};
+  const user = {'UserName': 'ocph23@gmail.com', 'Password': 'sony'};
   const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
@@ -26,7 +26,8 @@ export class AuthService {
  return this.http.post<User>(this.baseUrl + 'api/Users/authenticate', user, httpOptions).subscribe(result => {
     this.token = result;
     this.router.navigate(['/admin']);
-  }, error => console.error(error));
+  }, 
+  error => console.error(error));
 }
 
 

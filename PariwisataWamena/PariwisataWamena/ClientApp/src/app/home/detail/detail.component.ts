@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { Article } from 'src/app/models/models.component';
 import { ArticleService } from '../article.service';
+import { article } from 'src/app/models/models.component';
 
 @Component({
   selector: 'app-detail',
@@ -8,7 +8,7 @@ import { ArticleService } from '../article.service';
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent implements OnInit {
-public Data:Article;
+public Data:article;
   constructor(private articleService:ArticleService) { }
 
   ngOnInit() {

@@ -8,7 +8,6 @@ using Ocph.DAL;
 namespace PariwisataWamena.Models {
      [TableName ("user")]
      public class user {
-        private string _password;
 
         [PrimaryKey ("iduser")]
           [DbColumn ("iduser")]
