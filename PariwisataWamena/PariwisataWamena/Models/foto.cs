@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ocph.DAL;
- 
- namespace PariwisataWamena.Models 
+
+namespace PariwisataWamena.Models 
 { 
      [TableName("foto")] 
      public class foto  
