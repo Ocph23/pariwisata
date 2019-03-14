@@ -37,7 +37,13 @@ public hasLogin() {
   }
   return false;
 
-}
+  }
+
+
+
+  public getToken(): string {
+    return this.token.token;
+  }
 
 
 }

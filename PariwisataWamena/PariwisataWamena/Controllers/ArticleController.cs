@@ -39,20 +39,19 @@ namespace PariwisataWamena.Controllers {
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post (article model) {
+        public async Task<IActionResult> Post ([FromBody]  article model) {
             try {
 
                 if(model==null)
                  throw new SystemException ("Not Saved");
-                var user = userContext.GetByUserName (User.Identity.Name);
+                var id = Convert.ToInt32(User.Identity.Name);
+                user user = await userContext.Get(id);
                 model.createdate = DateTime.Now;
                 if (user != null) {
-                    model.iduser = user.Id;
+                    model.iduser = user.iduser;
                     var result = await context.Post (model);
-
                     return Ok (result);
                 }
-
                 throw new SystemException ("Not Saved");
 
             } catch (System.Exception ex) {

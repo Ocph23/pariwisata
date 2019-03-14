@@ -40,6 +40,7 @@ namespace PariwisataWamena.DataAccess {
         }
 
         public Task<user> GetByUserName (string usernama) {
+
             try {
                 using (var db = new DbContext ()) {
                     var result = db.Users.Where (o => o.username == usernama).FirstOrDefault ();

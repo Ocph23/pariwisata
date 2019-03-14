@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
 
     });
   }
+
 }
 
 
@@ -33,5 +34,5 @@ export interface User {
   LastName: string;
   UserName: string;
   Password: string;
-  Token: string;
+  token: string;
 }

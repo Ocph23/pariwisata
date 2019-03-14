@@ -2,6 +2,7 @@ import { Injectable, Inject } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { article, PanelArticle, ArticleType } from "../models/models.component";
+import { AuthService } from "../authentification/auth.service";
 
 @Injectable({
   providedIn: "root"
@@ -22,8 +23,7 @@ export class ArticleService {
   constructor(
     private http: HttpClient,
     @Inject("BASE_URL") private baseUrl: string,
-    private router: Router
-  ) {
+    private router: Router,private auth:AuthService) {
     this.headers = {
       headers: new HttpHeaders({
         "Content-Type": "application/json; charset=utf-8"
@@ -34,8 +34,9 @@ export class ArticleService {
   public async get() {
     try {
       if (!this.instance) {
+      
         this.http
-          .get<article[]>(this.path + "/api/article", this.headers)
+          .get<article[]>(this.baseUrl + "/api/article", this.headers)
           .subscribe(
             result => {
               this.Data = result;
@@ -78,8 +79,21 @@ export class ArticleService {
 
   async SaveArticle(model: article) {
     try {
-      if (model.idarticle != 0) {
-        this.http.put<article>(this.path + "/api/article/"+model.idarticle, model, this.headers)
+      const token ='Bearer '+ this.auth.getToken();
+      this.headers = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': token
+        })
+      };
+
+
+
+
+
+
+      if (model.idarticle !== undefined && model.idarticle > 0) {
+        this.http.put<article>(this.baseUrl + "api/article/" + model.idarticle, model, this.headers)
           .subscribe(
             result => {
               console.log(result);
@@ -91,7 +105,7 @@ export class ArticleService {
           );
       } else
         this.http
-          .post<article>(this.path + "/api/article", model, this.headers)
+          .post<article>(this.baseUrl + "api/article", model, this.headers)
           .subscribe(
             result => {
               console.log(result);
