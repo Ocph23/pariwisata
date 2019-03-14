@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -25,7 +26,7 @@ namespace PariwisataWamena {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices (IServiceCollection services) {
             services.AddCors ();
-            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2);
+            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
 
             var appSettingsSection = Configuration.GetSection ("AppSettings");
             services.Configure<AppSettings> (appSettingsSection);
@@ -102,6 +103,7 @@ namespace PariwisataWamena {
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment ()) {
+                    spa.Options.StartupTimeout = new TimeSpan(0, 0, 80);
                     spa.UseAngularCliServer (npmScript: "start");
                 }
             });

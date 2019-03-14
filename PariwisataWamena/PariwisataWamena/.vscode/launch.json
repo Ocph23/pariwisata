@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/PariwisataWamena.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.1/PariwisataWamena.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
