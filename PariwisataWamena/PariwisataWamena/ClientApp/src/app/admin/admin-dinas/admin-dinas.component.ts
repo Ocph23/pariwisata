@@ -35,47 +35,46 @@ export class AdminDinasComponent implements OnInit {
     ]
   };
   Data: PanelArticle;
- public Selected: article={title:"Profile",draft:"type here"} as article;
+
+ public Selected: article = {title: 'Profile', draft: 'type here'} as article;
 
   constructor(
     private auth: AuthService,
-    private dinasService:ArticleService,
-    @Inject("BASE_URL") private baseUrl: string
+    private dinasService: ArticleService,
+    @Inject('BASE_URL') private baseUrl: string
   ) {
-    dinasService.get();
-  
-   
+    dinasService.getData(ArticleType.Dinas).then(x => {
+      this.Data = x;
+      });
+
+
   }
 
-  public getContent(title:string) {
-    if(this.dinasService.Dinas==null)
-       this.Selected = {title:title.toUpperCase(),draft:"type "+title+ " here ..."} as article;
-       else
-       {
-         this.Data=this.dinasService.Dinas;
-        var findx=this.Data.datas.find(x=>x.title==title);
-        if(findx!=null)
-        {
-          this.Selected=findx;
-        }else{
-          this.Selected = {title:title.toUpperCase(),draft:"type "+title+ " here ..."} as article;
+  public getContent(title: string) {
+    if (this.Data == null) {
+       this.Selected = {title: title.toUpperCase(), draft: 'type ' + title + ' here ...'} as article;
+    } else {
+        const findx = this.Data.datas.find(x => x.title.toLowerCase() === title.toLowerCase());
+        if (findx != null) {
+          this.Selected = findx;
+        } else {
+          this.Selected = {title: title.toUpperCase(), draft: 'type ' + title + ' here ...'} as article;
         }
        }
 
   }
 
-  public save(data:article,status:string){
-    data.status=status;
-    if(status=="publish")
-    {
-      data.content=data.draft;
+  public save(data: article, status: string) {
+    data.status = status;
+    if (status == 'publish') {
+      data.content = data.draft;
     }
-    data.iduser=1;
-    data.type= ArticleType.Dinas;
-    this.dinasService.SaveArticle(data).then(x=>{
+    data.iduser = 1;
+    data.type = ArticleType.Dinas;
+    this.dinasService.SaveArticle(data).then(x => {
       console.log('saved');
 
-    },error=>{console.log(error)});
+    }, error => {console.log(error); });
   }
 
 

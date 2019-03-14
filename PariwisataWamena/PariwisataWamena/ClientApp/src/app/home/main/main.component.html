@@ -1,13 +1,13 @@
 <div class="header">
   <img src="././assets/images/cover3.jpg">
   <div class="search">
-      <app-search></app-search>
-    </div>
+    <app-search></app-search>
+  </div>
   <div class="title">
     <div style="text-align:center">
       <strong>SELAMAT DATANG</strong>
     </div>
-  
+
   </div>
 
 </div>
@@ -15,7 +15,7 @@
 <div class="row">
 
   <div class="col-md-8">
-    <div class="panel">
+    <div class="panel" *ngIf="Kuliner">
       <div class="panelTitle orange">
         <div class="titleText">
           KULINER
@@ -49,101 +49,8 @@
       </div>
     </div>
 
-    <div class="panel">
-      <div class="panelTitle green">
-        <div class="titleText">
-          KULINER
-        </div>
-        <hr class="panelline" />
-      </div>
-      <div class="panelBody">
-        <div class="imgBody">
-          <img src="././assets/images/makanan1.jpg">
-          <div class="title">
-            <strong> Warung Makan Aman</strong>
-          </div>
-          <div class="titleItem">
-            1 Minute Ago <span><strong>Admin</strong></span>
-          </div>
-        </div>
-        <div class="items">
-          <div class="item" *ngFor="let item of dataService.Destinasi.datas">
-            <img src="././assets/images/makanan2.jpg">
-            <div class="content">
-              <a [routerLink]='["/home/detail"]'>
-                <h5>{{ item.title}}</h5>
-              </a>
-              <div class="label label-green">
-                <span>{{ item.type}}</span>
-              </div>
-              <div class="label-content"> ini adalah content dari isi</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="panelTitle purple">
-        <div class="titleText">
-          KULINER
-        </div>
-        <hr class="panelline" />
-      </div>
-      <div class="panelBody">
-        <div class="imgBody">
-          <img src="././assets/images/makanan1.jpg">
-          <div class="title">
-            <strong> selec</strong>
-          </div>
-          <div class="titleItem">
-            1 Minute Ago <span><strong>Admin</strong></span>
-          </div>
-        </div>
-        <div class="items">
-          <div class="item" *ngFor="let item of dataService.Akomodasi.datas">
-            <img src="././assets/images/makanan2.jpg">
-            <div class="content">
-              <a [routerLink]='["/home/detail"]'>
-                <h5>{{ item.title}}</h5>
-              </a>
-              <div class="label label-purple">
-                <span>{{ item.type}}</span>
-              </div>
-              <div class="label-content"> ini adalah content dari isi</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
   <div class="col-md-4">
 
-    <div class="panel">
-      <div class="panelTitle blue">
-        <div class="titleText">
-          Info
-        </div>
-        <hr class="panelline" />
-      </div>
-      <div class="panelBody">
-        <div class="items">
-          <div class="item" *ngFor="let item of dataService.Destinasi.datas">
-            <img src="././assets/images/makanan2.jpg">
-            <div class="content">
-              <a [routerLink]='["/home/detail"]'>
-                <h5>{{ item.title}}</h5>
-              </a>
-              <div class="label label-orange">
-                <span>{{ item.type}}</span>
-              </div>
-              <div class="label-content"> ini adalah content dari isi</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
   </div>
 </div>

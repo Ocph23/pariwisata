@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ArticleService } from '../article.service';
+import { PanelArticle, article, ArticleType } from 'src/app/models/models.component';
 
 @Component({
   selector: 'app-dinas',
@@ -6,39 +8,51 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dinas.component.scss']
 })
 export class DinasComponent implements OnInit {
-page: any = {Title:'', contentTitle:'', contentBody: "ini Content"};
-  constructor() {
-    this.page.Title = 'DINAS PARIWISATA JAYAWIJAYA';
+  page: article;
 
+  Data: PanelArticle;
+  notFound: article = { title: 'Data Tidak Ditemukan' } as article;
+  Datas: article[];
+
+  constructor(private articleService: ArticleService) {
+   this.articleService.getData(ArticleType.Dinas).then(x=>{
+    this.Data= x;
+    this.onClickProfile();
+    });
+  
   }
 
-  ngOnInit() {
-   this.onClickProfile();
+ ngOnInit() {
+
   }
 
   onClickProfile() {
-    this.page.contentBody = "ini Profile";
-    this.page.contentTitle="Profile";
+    this.view("profile");
   }
 
   
   onClickVisiMisi() {
-    this.page.contentBody = "ini VISI DAN MISI";
-    this.page.contentTitle="VISI DAN MISI";
+    this.view("visi");
   }
 
   
   onClickStruktur() {
-    this.page.contentBody = "ini STRUKTUR ORGANISASI";
-    this.page.contentTitle="STRUKTUR ORGANISASI";
+    this.view("structure");
   }
 
   
   onClickKontak() {
-    this.page.contentBody = "ini Kontak";
-    this.page.contentTitle="Kontak";
+    this.view("contact");
   }
 
 
+
+  private view(data: string) {
+    var selected = this.Data.datas.find(x => x.title.toLowerCase() == data.toLowerCase());
+    if (selected)
+      this.page = selected;
+    else
+      this.page = this.notFound;
+  }
 
 }

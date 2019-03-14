@@ -1,22 +1,13 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PariwisataWamena.Models;
 
 namespace PariwisataWamena.Controllers {
     [Route ("api/[controller]")]
     public class KulinerController : Controller {
-        [HttpGet ("[action]")]
-        public IEnumerable<article> Kuliners () {
-            return new List<article> () {
-                new article { type="Kuliner",
-                    title = "Papeda", tags = new List<string> () { "Kuliner", "Jajanan" }, 
-                        content = $"Makanan khas Papua adalah makanan ini yang selalu membawa kebahagiaan"
-                        }
-            };
-        }
-
-        [HttpGet ("[action]")]
-        public IActionResult Get () {
+        [HttpGet]
+        public async Task<IActionResult> Get () {
             var data = new List<article> () {
                 new article {
                 type = "Kuliner", title = "Papeda", tags = new List<string> () { "Kuliner", "Jajanan" },
@@ -47,7 +38,7 @@ namespace PariwisataWamena.Controllers {
                 content = $"Makanan khas Papua adalah makanan ini yang selalu membawa kebahagiaan"
                 }
             };
-            return Ok (data);
+            return Ok (await Task.FromResult(data));
         }
 
     }

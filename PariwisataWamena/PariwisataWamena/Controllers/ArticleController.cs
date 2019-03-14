@@ -1,10 +1,10 @@
-using System.Net;
 using System;
+using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PariwisataWamena.DataAccess;
 using PariwisataWamena.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace PariwisataWamena.Controllers {
     [Route ("api/[controller]")]
@@ -39,13 +39,13 @@ namespace PariwisataWamena.Controllers {
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post ([FromBody]  article model) {
+        public async Task<IActionResult> Post ([FromBody] article model) {
             try {
 
-                if(model==null)
-                 throw new SystemException ("Not Saved");
-                var id = Convert.ToInt32(User.Identity.Name);
-                user user = await userContext.Get(id);
+                if (model == null)
+                    throw new SystemException ("Not Saved");
+                var id = Convert.ToInt32 (User.Identity.Name);
+                user user = await userContext.Get (id);
                 model.createdate = DateTime.Now;
                 if (user != null) {
                     model.iduser = user.iduser;
@@ -60,19 +60,18 @@ namespace PariwisataWamena.Controllers {
             }
         }
 
-       [HttpPut("{id}")]
-        public async Task<IActionResult> Put (int id,[FromBody] article item) {
+        [HttpPut ("{id}")]
+        public async Task<IActionResult> Put (int id, [FromBody] article item) {
             try {
-                if(id<=0 || item==null)
-                {
-                throw new SystemException ("model isnull");
+                if (id <= 0 || item == null) {
+                    throw new SystemException ("model isnull");
                 }
-
-                var user = userContext.GetByUserName (User.Identity.Name);
+                var iduser = Convert.ToInt32 (User.Identity.Name);
+                var user = await userContext.Get (iduser);
                 item.createdate = DateTime.Now;
                 if (user != null) {
-                    item.iduser = user.Id;
-                    var result = await context.Put(id,item);
+                    item.iduser = user.iduser;
+                    var result = await context.Put (id, item);
 
                     return Ok (result);
                 }
@@ -84,14 +83,11 @@ namespace PariwisataWamena.Controllers {
             }
         }
 
-
-        
-       
         [Authorize]
-         [HttpDelete ("id")]
+        [HttpDelete ("id")]
         public async Task<IActionResult> Delete (int id) {
             try {
-                var deleted = await context.Delete(id);
+                var deleted = await context.Delete (id);
                 if (deleted) {
                     return Ok (deleted);
                 }
