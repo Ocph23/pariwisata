@@ -8,13 +8,14 @@ import { article } from 'src/app/models/models.component';
   styleUrls: ['../admin.component.scss', './admin-add-article.component.scss']
 })
 export class AdminAddArticleComponent implements OnInit {
-public article:article;
+public Data: article;
+
   constructor(private router: ActivatedRoute) { }
 
   ngOnInit() {
     const sub = this.router.params.subscribe(params => {
-     this.article=params as article;
-     console.log(this.article);
+     this.Data = params as article;
+     console.log(this.Data);
       });
   }
 

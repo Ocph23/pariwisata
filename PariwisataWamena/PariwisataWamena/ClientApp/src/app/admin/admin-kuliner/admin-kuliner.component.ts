@@ -6,14 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['../admin.component.scss', './admin-kuliner.component.scss']
 })
 export class AdminKulinerComponent implements OnInit {
-  show:boolean = false;
+  show: Boolean = false;
 
   toggleCollapse() {
-    this.show = !this.show
+    this.show = !this.show;
   }
   constructor() { }
 
   ngOnInit() {
+  }
+
+
+  public tests(){
+
   }
 
 }

@@ -12,4 +12,9 @@ export class AdminAgentComponent implements OnInit {
   ngOnInit() {
   }
 
+  public tests()
+  {
+    
+  }
+
 }
