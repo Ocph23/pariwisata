@@ -1,0 +1,24 @@
+get https://localhost:5001/api/article
+
+###
+
+POST https://localhost:5001/account/login 
+
+{"email":"ocph23","password":"sony"}
+
+###
+POST https://localhost:5001/account/register   HTTP/1.1
+User-Agent: rest-client
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+Content-Type: application/json
+
+{"username":"ocph23.test@gmail","password":"sony"}
+
+###
+
+POST https://localhost:5001/account/authenticate   HTTP/1.1
+User-Agent: rest-client
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+Content-Type: application/json
+
+{"username":"ocph23@gmail","password":"sony"}
