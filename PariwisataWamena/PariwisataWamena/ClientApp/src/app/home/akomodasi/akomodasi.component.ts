@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PanelArticle } from 'src/app/models/models.component';
 
 @Component({
   selector: 'app-akomodasi',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./akomodasi.component.css']
 })
 export class AkomodasiComponent implements OnInit {
-
+public Akomodasi:PanelArticle;
   constructor() { }
 
   ngOnInit() {

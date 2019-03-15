@@ -41,7 +41,7 @@ namespace PariwisataWamena.Models
 
 
         public IEnumerable<string> tags { get; set; }
-        public user user { get; set; }
+        public User user { get; set; }
     }
 }
 

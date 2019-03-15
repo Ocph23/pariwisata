@@ -26,4 +26,10 @@ private data: article;
     const data ={'Type':'Akomodasi', 'Title':'', 'Content':'Siapa'};
     this.router.navigate(['/admin/article',data]);
   }
+
+
+
+  public tests(){
+    
+  }
 }

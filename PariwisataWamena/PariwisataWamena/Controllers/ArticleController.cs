@@ -10,7 +10,7 @@ namespace PariwisataWamena.Controllers {
     [Route ("api/[controller]")]
     public class ArticleController : Controller {
         private ArticleDTO context = new ArticleDTO ();
-        private UserDTO userContext = new UserDTO ();
+      
 
         [HttpGet]
         public async Task<IActionResult> Get () {
@@ -42,16 +42,16 @@ namespace PariwisataWamena.Controllers {
         public async Task<IActionResult> Post ([FromBody] article model) {
             try {
 
-                if (model == null)
-                    throw new SystemException ("Not Saved");
-                var id = Convert.ToInt32 (User.Identity.Name);
-                user user = await userContext.Get (id);
-                model.createdate = DateTime.Now;
-                if (user != null) {
-                    model.iduser = user.iduser;
-                    var result = await context.Post (model);
-                    return Ok (result);
-                }
+                // if (model == null)
+                //     throw new SystemException ("Not Saved");
+                // var id = Convert.ToInt32 (User.Identity.Name);
+                // User user = await userContext.Get (id);
+                // model.createdate = DateTime.Now;
+                // if (user != null) {
+                //     model.iduser = user.iduser;
+                //     var result = await context.Post (model);
+                //     return Ok (result);
+                // }
                 throw new SystemException ("Not Saved");
 
             } catch (System.Exception ex) {
@@ -66,15 +66,15 @@ namespace PariwisataWamena.Controllers {
                 if (id <= 0 || item == null) {
                     throw new SystemException ("model isnull");
                 }
-                var iduser = Convert.ToInt32 (User.Identity.Name);
-                var user = await userContext.Get (iduser);
-                item.createdate = DateTime.Now;
-                if (user != null) {
-                    item.iduser = user.iduser;
-                    var result = await context.Put (id, item);
+                // var iduser = Convert.ToInt32 (User.Identity.Name);
+                // var user = await userContext.Get (iduser);
+                // item.createdate = DateTime.Now;
+                // if (user != null) {
+                //     item.iduser = user.iduser;
+                //     var result = await context.Put (id, item);
 
-                    return Ok (result);
-                }
+                //     return Ok (result);
+                // }
                 throw new SystemException ("Not Saved");
 
             } catch (System.Exception ex) {

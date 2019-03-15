@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PanelArticle } from 'src/app/models/models.component';
 
 @Component({
   selector: 'app-destinasi',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DestinasiComponent implements OnInit {
 
+  public Destinasi:PanelArticle;
   constructor() { }
 
   ngOnInit() {

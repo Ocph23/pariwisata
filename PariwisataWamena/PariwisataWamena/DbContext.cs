@@ -21,13 +21,14 @@ namespace PariwisataWamena
             // db = dbClient.GetDatabase("heroku_l5k9k33h");
             // var a = Configuration.GetSection ("AppSettings");
 
-            this.ConnectionString="server=localhost;database=dbpariwisata;uid=root;password=";
+            this.ConnectionString = "server=localhost;database=dbpariwisata;uid=root;password=";
+            //this.ConnectionString="server=us-cdbr-iron-east-03.cleardb.net;database=heroku_c7c590f5166336f;uid=b82d83c3ac4131;password=3a78dca0;port=3306";
         }
 
-        public IRepository<user> Users { get { return new Repository<user>(this); } }
-         public IRepository<role> Roles { get { return new Repository<role>(this); } }
-          public IRepository<userinrole> UserRoles { get { return new Repository<userinrole>(this); } }
-             public IRepository<article> Article { get { return new Repository<article>(this); } }
+        public IRepository<User> Users { get { return new Repository<User>(this); } }
+        public IRepository<role> Roles { get { return new Repository<role>(this); } }
+        public IRepository<userinrole> UserRoles { get { return new Repository<userinrole>(this); } }
+        public IRepository<article> Article { get { return new Repository<article>(this); } }
 
     }
 }

@@ -12,4 +12,9 @@ export class AdminDestinasiComponent implements OnInit {
   ngOnInit() {
   }
 
+  public tests()
+  {
+    
+  }
+
 }

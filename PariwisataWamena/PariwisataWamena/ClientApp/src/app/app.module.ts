@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './home/nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -11,7 +10,6 @@ import { KulinerComponent } from './home/kuliner/kuliner.component';
 import { DestinasiComponent } from './home/destinasi/destinasi.component';
 import { AkomodasiComponent } from './home/akomodasi/akomodasi.component';
 import { DinasComponent } from './home/dinas/dinas.component';
-import { AgentComponent } from './home/agent/agent.component';
 import { AdminComponent } from './admin/admin.component';
 import { from } from 'rxjs';
 import { LoginComponent } from './authentification/login/login.component';
@@ -29,6 +27,11 @@ import { ModelsComponent } from './models/models.component';
 import { SearchComponent } from './search/search.component';
 import { FilterPipe } from './filter.pipe';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { AgentHomeComponent } from './home/agent-home/agent-home.component';
+import { AgentComponent } from './agent/agent.component';
+import { LayananComponent } from './agent/layanan/layanan.component';
+import { TransaksiComponent } from './agent/transaksi/transaksi.component';
+import { ContactComponent } from './agent/contact/contact.component';
 
 
 
@@ -41,7 +44,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     DestinasiComponent,
     AkomodasiComponent,
     DinasComponent,
-    AgentComponent,
     AdminComponent,
     LoginComponent,
     AuthentificationComponent,
@@ -52,7 +54,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     AdminAgentComponent,
     AdminDestinasiComponent,
     AdminAddArticleComponent,
-    DetailComponent, ModelsComponent, SearchComponent, FilterPipe
+    AgentComponent,
+    DetailComponent, ModelsComponent, SearchComponent, FilterPipe, AgentHomeComponent, LayananComponent, TransaksiComponent, ContactComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -68,7 +71,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
           { path: 'akomodasi', component: AkomodasiComponent },
           { path: 'dinas', component: DinasComponent },
           { path: 'destinasi', component: DestinasiComponent },
-          { path: 'agen', component: AgentComponent },
+          { path: 'agen', component: AgentHomeComponent },
           { path: 'detail',  component: DetailComponent,data:null},
         ]
       },
@@ -78,8 +81,10 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
         { path: 'akomodasi',  component: AdminAkomodasiComponent},
         { path: 'agent',  component: AdminAgentComponent},
         { path: 'destinasi',  component: AdminDestinasiComponent},
-        { path: 'article',  component: AdminAddArticleComponent,data:null},
+        { path: 'article',  component: AdminAddArticleComponent, data: null},
 
+      ]},
+      { path: 'agent', component: AgentComponent , children: [
       ]},
       {path: 'account', component: AuthentificationComponent, children: [
         { path: 'login', component: LoginComponent },

@@ -1,0 +1,110 @@
+@media (max-width: 767px) {
+
+    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    .body-content {
+      padding-top: 50px;
+    }
+  
+    .panelMenu{
+      position: absolute;
+      right: 5px;
+      top:2px
+    }
+  
+    .dropdown{
+      position: absolute !important;
+      right: 5px;
+      top:2px
+    }
+  
+    .panel{
+     width: 100% !important;
+      float: left;
+    }
+  
+    .items {
+      .item {
+        min-height: 85px !important;
+        img {
+          position: absolute;
+          height: 100% !important;
+          width: 100px !important;
+        }
+  
+        .content {
+          margin-left: 100px !important;
+          padding: 10px;
+        }
+      }
+    }
+  
+    
+  .addItem{
+    position: fixed;
+    bottom: 20px !important;
+    right: 30px !important;
+    .material-icons{
+      font-size: 40px !important;
+      color: rgb(3, 82, 3);
+      box-shadow: solid 10px gray;
+    }
+  }
+  
+  }
+  
+  
+  
+  .panel{
+   width: 25%;
+    float: left;
+  }
+  
+    .imgBody{
+      img{height: 200px;}
+    }
+  
+  .adminContent{
+    position: relative;
+    padding: 10px;
+    height: 200px;
+    .dateItem{
+      position:absolute;
+      bottom: 0px;
+      padding: 10px;
+    }
+  }
+  
+  
+  .label{
+    font-size: 14px;
+  }
+  
+  .addItem{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    .material-icons{
+      font-size: 60px;
+      color: rgb(3, 82, 3);
+      box-shadow: solid 10px gray;
+    }
+  }
+  
+  
+  .createArticle
+  {
+    margin-top: 20px;
+    input{
+      margin-bottom: 10px;
+    }
+    textarea{
+      margin-bottom: 10px;
+      min-height: 450px;
+    }
+    .comandarea{
+      display: inline;
+      button{
+        margin-right: 5px;
+      }
+    }
+  }
