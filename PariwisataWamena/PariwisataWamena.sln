@@ -5,7 +5,14 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PariwisataWamena", "PariwisataWamena\PariwisataWamena.csproj", "{10CC1ABC-37D7-4C77-AABB-FE364857219F}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Ocph.DAL.Source", "Ocph.DAL\Ocph.DAL.Source.shproj", "{FE4BE3BE-C5CF-4E3F-B710-E5FFF9D4D172}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocph.DAL.MySql.Core", "Ocph.DAL.MySql.Core\Ocph.DAL.MySql.Core.csproj", "{AFD8820B-12C2-47B2-B8C8-1F2A05B8053E}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Ocph.DAL\Ocph.DAL.projitems*{fe4be3be-c5cf-4e3f-b710-e5fff9d4d172}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -15,6 +22,10 @@ Global
 		{10CC1ABC-37D7-4C77-AABB-FE364857219F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10CC1ABC-37D7-4C77-AABB-FE364857219F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10CC1ABC-37D7-4C77-AABB-FE364857219F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFD8820B-12C2-47B2-B8C8-1F2A05B8053E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFD8820B-12C2-47B2-B8C8-1F2A05B8053E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFD8820B-12C2-47B2-B8C8-1F2A05B8053E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFD8820B-12C2-47B2-B8C8-1F2A05B8053E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
