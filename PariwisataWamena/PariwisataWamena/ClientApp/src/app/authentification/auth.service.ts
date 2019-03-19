@@ -9,16 +9,16 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
 })
 export class AuthService {
   // tslint:disable-next-line: no-use-before-declare
-  private storage: StorageHelper.LocalStorageWorker = new StorageHelper.LocalStorageWorker();
+  public storage: StorageHelper.LocalStorageWorker = new StorageHelper.LocalStorageWorker();
   private token: User;
   constructor(
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
     private router: Router
-  ) {}
+  ) { }
 
-  login() {
-    const user = { Email: 'ocph23@gmail.com', Password: 'sony' };
+  login(username: string, password: string) {
+    const user = { username: username, Password: password };
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -26,23 +26,7 @@ export class AuthService {
     };
 
     return this.http
-      .post<User>(this.baseUrl + 'account/login', user, httpOptions)
-      .subscribe(
-        result => {
-          this.storage.add('username', result.username);
-          this.storage.add('token', result.token);
-          this.storage.addObject('role', result.roles[0]);
-
-          if (this.IsInRole('Admin')) {
-            this.router.navigate(['/admin']);
-          } else if (this.IsInRole('Agent')) {
-            this.router.navigate(['/agent']);
-          } else if (this.IsInRole('Tourist')) {
-            this.router.navigate(['/main']);
-          }
-        },
-        error => console.error(error)
-      );
+      .post<any>(this.baseUrl + 'account/authenticate', user, httpOptions);
   }
 
   public hasLogin() {
@@ -54,8 +38,9 @@ export class AuthService {
   }
 
   public getToken(): string {
+    const user = this.storage.getObject('user');
     const inrole = this.IsInRole('Admin');
-    const token = this.storage.get('token');
+    const token = user.token;
     if (token != null) {
       return token;
     } else {
@@ -63,13 +48,40 @@ export class AuthService {
     }
   }
 
-  public IsInRole(item: string): boolean {
-    const role = this.storage.getObject('role');
-    if (role != null && role.name === item) {
-      return true;
-    } else {
-      return false;
+
+  public getHttpHeader() {
+    try {
+      const token = this.getToken();
+      if (token) {
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + token
+          })
+        };
+        return httpOptions;
+      } else { 
+        throw new Error('You Not Have Access');
+      }
+    } catch (error) {
+      throw new Error(error);
     }
+
+  }
+
+
+
+  public IsInRole(item: string): boolean {
+    const user = this.storage.getObject('user');
+    let found = false;
+    if (user.roles != null) {
+      user.roles.forEach(element => {
+        if (element.name === item) {
+          found = true;
+        }
+      });
+    }
+    return found;
   }
 }
 

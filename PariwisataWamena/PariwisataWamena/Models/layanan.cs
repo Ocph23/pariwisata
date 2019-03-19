@@ -8,7 +8,7 @@ using Ocph.DAL;
  namespace PariwisataWamena.Models 
 { 
      [TableName("service")] 
-     public class service 
+     public class layanan 
    {
           [PrimaryKey("idservice")] 
           [DbColumn("idservice")] 
@@ -24,7 +24,13 @@ using Ocph.DAL;
           public int idagent {  get; set;} 
 
           [DbColumn("price")] 
+
           public double price {  get; set;} 
+
+
+           [DbColumn("active")] 
+
+          public bool active {  get; set;} 
 
      }
 }

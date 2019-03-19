@@ -13,7 +13,7 @@ namespace PariwisataWamena.Services
         {
         }
 
-        protected EmailServices()
+        public EmailServices()
         {
         }
 

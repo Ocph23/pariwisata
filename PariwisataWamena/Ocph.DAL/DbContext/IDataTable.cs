@@ -46,6 +46,5 @@ namespace Ocph.DAL.DbContext
 
         object GetLastItem();
 
-
     }
 }

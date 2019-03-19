@@ -17,6 +17,11 @@ using Ocph.DAL;
           [DbColumn("name")] 
           public string name {  get; set;} 
 
+
+           [DbColumn("email")] 
+            public string email {  get; set;} 
+
+
           [DbColumn("address")] 
           public string address {  get; set;} 
 

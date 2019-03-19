@@ -9,8 +9,7 @@ using PariwisataWamena.Models;
 namespace PariwisataWamena.Controllers {
     [Route ("api/[controller]")]
     public class ArticleController : Controller {
-        private ArticleDTO context = new ArticleDTO ();
-      
+        private ArticleDataAccess context = new ArticleDataAccess ();
 
         [HttpGet]
         public async Task<IActionResult> Get () {
@@ -38,43 +37,20 @@ namespace PariwisataWamena.Controllers {
             }
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post ([FromBody] article model) {
             try {
 
-                // if (model == null)
-                //     throw new SystemException ("Not Saved");
-                // var id = Convert.ToInt32 (User.Identity.Name);
-                // User user = await userContext.Get (id);
-                // model.createdate = DateTime.Now;
-                // if (user != null) {
-                //     model.iduser = user.iduser;
-                //     var result = await context.Post (model);
-                //     return Ok (result);
-                // }
-                throw new SystemException ("Not Saved");
-
-            } catch (System.Exception ex) {
-
-                return BadRequest (ex.Message);
-            }
-        }
-
-        [HttpPut ("{id}")]
-        public async Task<IActionResult> Put (int id, [FromBody] article item) {
-            try {
-                if (id <= 0 || item == null) {
-                    throw new SystemException ("model isnull");
+                if (model == null)
+                    throw new SystemException ("Not Saved");
+                int id = Convert.ToInt32 (User.Identity.Name);
+                model.createdate = DateTime.Now;
+                if (id > 0) {
+                    model.iduser = id;
+                    var result = await context.Post (model);
+                    return Ok (result);
                 }
-                // var iduser = Convert.ToInt32 (User.Identity.Name);
-                // var user = await userContext.Get (iduser);
-                // item.createdate = DateTime.Now;
-                // if (user != null) {
-                //     item.iduser = user.iduser;
-                //     var result = await context.Put (id, item);
-
-                //     return Ok (result);
-                // }
                 throw new SystemException ("Not Saved");
 
             } catch (System.Exception ex) {
@@ -84,6 +60,29 @@ namespace PariwisataWamena.Controllers {
         }
 
         [Authorize]
+        [HttpPut ("{id}")]
+        public async Task<IActionResult> Put (int id, [FromBody] article item) {
+            try {
+                if (id <= 0 || item == null) {
+                    throw new SystemException ("model isnull");
+                }
+                var iduser = Convert.ToInt32 (User.Identity.Name);
+                item.createdate = DateTime.Now;
+                if (iduser > 0) {
+                    item.iduser = iduser;
+                    var result = await context.Put (id, item);
+
+                    return Ok (result);
+                }
+                throw new SystemException ("Not Saved");
+
+            } catch (System.Exception ex) {
+
+                return BadRequest (ex.Message);
+            }
+        }
+
+        [Authorize(Roles="Admin")]
         [HttpDelete ("id")]
         public async Task<IActionResult> Delete (int id) {
             try {

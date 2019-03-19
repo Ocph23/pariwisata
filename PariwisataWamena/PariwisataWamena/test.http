@@ -1,6 +1,9 @@
 get https://localhost:5001/api/article
 
 ###
+get https://localhost:5001/account/getall
+
+###
 
 POST https://localhost:5001/account/login 
 
@@ -21,4 +24,4 @@ User-Agent: rest-client
 Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
 Content-Type: application/json
 
-{"username":"ocph23@gmail","password":"sony"}
+{"username":"ocph23.test@gmail","password":"sony"}

@@ -79,5 +79,11 @@ namespace Ocph.DAL.Repository
         {
             return (T)DataTables.GetLastItem();
         }
+
+        public T Find(Expression<Func<T, bool>> expression)
+        {
+            var result= DataTables.Select(expression);
+            return result.FirstOrDefault();
+        }
     }
 }

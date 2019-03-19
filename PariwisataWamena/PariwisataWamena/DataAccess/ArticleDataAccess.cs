@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace PariwisataWamena.DataAccess
 {
-    public class ArticleDTO : IDataAccess<article>
+    public class ArticleDataAccess : IDataAccess<article>
     {
         public Task<bool> Delete(int id)
         {
@@ -109,14 +109,14 @@ namespace PariwisataWamena.DataAccess
             }
         }
 
-        public Task<article> Put(int id, article t)
+        public Task<bool> Put(int id, article t)
         {
             using (var db = new DbContext())
             {
                 try
                 {
                     if (db.Article.Update(x => new { x.content, x.createdate, x.draft, x.iduser, x.status, x.thumb, x.title, x.type }, t, x => x.idarticle == id))
-                        return Task.FromResult(t);
+                        return Task.FromResult(true);
 
                     throw new SystemException("Not Saved");
                 }
@@ -126,5 +126,6 @@ namespace PariwisataWamena.DataAccess
                 }
             }
         }
+
     }
 }

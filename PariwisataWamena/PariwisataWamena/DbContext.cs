@@ -30,5 +30,9 @@ namespace PariwisataWamena
         public IRepository<userinrole> UserRoles { get { return new Repository<userinrole>(this); } }
         public IRepository<article> Article { get { return new Repository<article>(this); } }
 
+        public IRepository<layanan> Layanan { get { return new Repository<layanan>(this); } }
+
+           public IRepository<agent> Agent { get { return new Repository<agent>(this); } }
+
     }
 }

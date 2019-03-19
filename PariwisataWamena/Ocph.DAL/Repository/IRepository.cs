@@ -25,6 +25,6 @@ namespace Ocph.DAL.Repository
         object ExecuteStoreProcedureNonQuery(string storeProcedure);
 
         T GetLastItem();
-      
+        T Find(Expression<Func<T, bool>> expression);
     }
 }

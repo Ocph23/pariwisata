@@ -30,7 +30,9 @@ namespace PariwisataWamena.Models
         public byte[] PasswordSalt { get; set; }
         
         public string token { get; set; }
-        public List<role> roles { get; set; }
+
+        
+        public IEnumerable<role> roles { get; set; }
 
 
     }

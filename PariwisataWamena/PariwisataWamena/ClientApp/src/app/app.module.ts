@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -32,7 +32,9 @@ import { AgentComponent } from './agent/agent.component';
 import { LayananComponent } from './agent/layanan/layanan.component';
 import { TransaksiComponent } from './agent/transaksi/transaksi.component';
 import { ContactComponent } from './agent/contact/contact.component';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AlertConfigComponent } from './alert-config/alert-config.component';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 
 @NgModule({
@@ -55,40 +57,54 @@ import { ContactComponent } from './agent/contact/contact.component';
     AdminDestinasiComponent,
     AdminAddArticleComponent,
     AgentComponent,
-    DetailComponent, ModelsComponent, SearchComponent, FilterPipe, AgentHomeComponent, LayananComponent, TransaksiComponent, ContactComponent
+    DetailComponent,
+    ModelsComponent,
+    SearchComponent,
+    FilterPipe, AgentHomeComponent,
+    LayananComponent, TransaksiComponent,
+    ContactComponent,
+    AlertConfigComponent
   ],
   imports: [
+    ReactiveFormsModule , SweetAlert2Module.forRoot(),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,AngularEditorModule,
-    FormsModule,
+    HttpClientModule, AngularEditorModule,
+    FormsModule, NgbModule,
     RouterModule.forRoot([
-      {path: '', redirectTo: 'home/main', pathMatch: 'full'},
-      {path: 'home', redirectTo: 'home/main'},
+      { path: '', redirectTo: 'home/main', pathMatch: 'full' },
+      { path: 'home', redirectTo: 'home/main' },
+      { path: 'user', redirectTo: 'user/login' },
       {
-        path: 'home', component: HomeComponent,  children: [
-          { path: 'main',  component: MainComponent},
-          { path: 'kuliner', component: KulinerComponent},
+        path: 'home', component: HomeComponent, children: [
+          { path: 'main', component: MainComponent },
+          { path: 'kuliner', component: KulinerComponent },
           { path: 'akomodasi', component: AkomodasiComponent },
           { path: 'dinas', component: DinasComponent },
           { path: 'destinasi', component: DestinasiComponent },
           { path: 'agen', component: AgentHomeComponent },
-          { path: 'detail',  component: DetailComponent,data:null},
+          { path: 'detail', component: DetailComponent, data: null },
         ]
       },
-      { path: 'admin', component: AdminComponent , children: [
-        { path: 'dinas',  component: AdminDinasComponent},
-        { path: 'kuliner',  component: AdminKulinerComponent},
-        { path: 'akomodasi',  component: AdminAkomodasiComponent},
-        { path: 'agent',  component: AdminAgentComponent},
-        { path: 'destinasi',  component: AdminDestinasiComponent},
-        { path: 'article',  component: AdminAddArticleComponent, data: null},
+      {
+        path: 'admin', component: AdminComponent, children: [
+          { path: 'dinas', component: AdminDinasComponent },
+          { path: 'kuliner', component: AdminKulinerComponent },
+          { path: 'akomodasi', component: AdminAkomodasiComponent },
+          { path: 'agent', component: AdminAgentComponent },
+          { path: 'destinasi', component: AdminDestinasiComponent },
+          { path: 'article', component: AdminAddArticleComponent, data: null },
 
-      ]},
-      { path: 'agent', component: AgentComponent , children: [
-      ]},
-      {path: 'account', component: AuthentificationComponent, children: [
-        { path: 'login', component: LoginComponent },
-      ]}
+        ]
+      },
+      {
+        path: 'agent', component: AgentComponent, children: [
+        ]
+      },
+      {
+        path: 'user', component: AuthentificationComponent, children: [
+          { path: 'login', component: LoginComponent },
+        ]
+      }
     ])
   ],
   providers: [AuthService],
