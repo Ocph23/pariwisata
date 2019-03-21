@@ -1,4 +1,4 @@
-<swal #messageSwal title="{{ alertModel.title }}" text="" type="error" [showCancelButton]="false">
+<swal #messageSwal title="" text="" type="info" [showCancelButton]="false">
 </swal>
 
 <ng-template class="modal" #content let-modal>
@@ -41,67 +41,63 @@
 
 
 
-
-
-<h2>DAFTAR AAGENT PERJALANAN</h2>
+<h2>AGENT PERJALANAN</h2>
 <div class="adminpanel">
   <div class="row">
-    <div class="panel">
-      <div class="panelBody">
-        <div class="imgBody">
-          <img src="././assets/images/makanan1.jpg">
-          <div class="title">
-            <div class="label label-blue">
-              <span>Agent</span>
-            </div>
-          </div>
-          <div class="titleItem">
-            <h6>WAMENA TRAVEL AND TAOURE</h6>
-          </div>
-        </div>
-        <div class="items">
-          <div class="item">
-            <div class="adminContent">
-
-              <div class="label-content"> ini adalah content dari isi</div>
-              <div class="dateItem">
-                1 Minute Ago <span><strong>Admin</strong></span>
+    <div class="col-md-4" *ngFor="let item of agents">
+      <div class="panel border-top border-right box-shadow">
+        <div class="panelBody ">
+          <div class="imgBody">
+            <div class="title">
+              <div class="label">
+                <h4>{{item.name}}</h4>
               </div>
-
             </div>
+            <div class="menuIcon" placement="bottom-right" ngbDropdown #myDrop="ngbDropdown">
+              <a class="btn" id="dropdownManual" ngbDropdownToggle></a>
+              <div class="dropdown" ngbDropdownMenu aria-labelledby="dropdownManual">
+                <a class="btn" (click)="editItem(item,content)" ngbDropdownItem>Edit</a>
+              </div>
+            </div>
+          </div>
+          <div class="items">
+            <div class="item">
+              <div class="adminContent">
+                <div class="label-content"><h6> Contact :  {{item.contactName}}</h6></div>
+                <div class="label-content"><h6> Adress :   {{item.address}}</h6></div>
+                <div class="label-content"><h6> Telepon :   {{item.telepon}}</h6></div>
+                <div class="dateItem">
+
+                </div>
+
+              </div>
+            </div>
+
           </div>
 
         </div>
+
       </div>
     </div>
-    <div class="panel">
-      <div class="panelBody">
-        <div class="imgBody">
-          <img src="././assets/images/makanan1.jpg">
-          <div class="title">
-            <div class="label label-blue">
-              <span>Publish</span>
-            </div>
-          </div>
-          <div class="titleItem">
-            <h6>Judul</h6>
-          </div>
-        </div>
-        <div class="items">
-          <div class="item">
-            <div class="adminContent">
 
-              <div class="label-content"> ini adalah content dari isi</div>
-              <div class="dateItem">
-                1 Minute Ago <span><strong>Admin</strong></span>
-              </div>
 
-            </div>
-          </div>
 
-        </div>
-      </div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
 
   <div class="addItem">

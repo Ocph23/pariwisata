@@ -33,7 +33,6 @@ import { LayananComponent } from './agent/layanan/layanan.component';
 import { TransaksiComponent } from './agent/transaksi/transaksi.component';
 import { ContactComponent } from './agent/contact/contact.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AlertConfigComponent } from './alert-config/alert-config.component';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 
@@ -63,7 +62,6 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
     FilterPipe, AgentHomeComponent,
     LayananComponent, TransaksiComponent,
     ContactComponent,
-    AlertConfigComponent
   ],
   imports: [
     ReactiveFormsModule , SweetAlert2Module.forRoot(),

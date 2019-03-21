@@ -1,67 +1,93 @@
-<h2>KULINER</h2>
+<h2>DESTINASI BARU</h2>
 <div class="adminpanel">
   <div class="row">
-    <div class="panel">
-      <div class="panelBody">
-        <div class="imgBody">
-          <img src="././assets/images/makanan1.jpg">
-          <div class="title">
-            <div class="label label-blue">
-              <span>Publish</span>
-            </div>
-          </div>
-          <div class="titleItem">
-            <h6>Judul</h6>
-          </div>
-        </div>
-        <div class="items">
-          <div class="item">
-            <div class="adminContent">
-
-              <div class="label-content"> ini adalah content dari isi</div>
-              <div class="dateItem">
-                1 Minute Ago <span><strong>Admin</strong></span>
+    <div class="col-md-4" *ngFor="let item of destinasi.datas">
+      <div class="panel border box-shadow sm-2">
+        <div class="panelBody ">
+          <div class="imgBody">
+            <img src="././assets/images/makanan1.jpg">
+            <div class="menuIcon" placement="bottom-right" ngbDropdown #myDrop="ngbDropdown">
+              <a class="btn" id="dropdownManual" ngbDropdownToggle></a>
+              <div class="dropdown" ngbDropdownMenu aria-labelledby="dropdownManual">
+                <a class="btn" (click)="editItem(item,content)" ngbDropdownItem>Edit</a>
               </div>
+            </div>
+            <div class="title">
 
+              <div class="label label-blue">
+                <span>{{item.status}}</span>
+              </div>
+            </div>
+            <div class="titleItem">
+              <h4>{{item.title}}</h4>
             </div>
           </div>
 
+          <div class="items">
+            <div class="item" style="min-height:0px;background-color:transparent !important">
+              <div class="adminContent" style="height:50px !important">
+                <div class="label-content"> ini adalah Baru dari isi</div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
+
       </div>
     </div>
-    <div class="panel">
-      <div class="panelBody">
-        <div class="imgBody">
-          <img src="././assets/images/makanan1.jpg">
-          <div class="title">
-            <div class="label label-blue">
-              <span>Publish</span>
-            </div>
-          </div>
-          <div class="titleItem">
-            <h6>Judul</h6>
-          </div>
-        </div>
-        <div class="items">
-          <div class="item">
-            <div class="adminContent">
 
-              <div class="label-content"> ini adalah content dari isi</div>
-              <div class="dateItem">
-                1 Minute Ago <span><strong>Admin</strong></span>
-              </div>
 
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
   </div>
-  
+
   <div class="addItem">
-      <i class="material-icons btn" (click)="tests()">add_circle</i>
-    </div>
+    <i class="material-icons btn" (click)="addItem()">add_circle</i>
+  </div>
 </div>
+
+
+
+<swal #swalMessage title="" text="" type="info" [showCancelButton]="false"></swal>
+
+<ng-template class="modal" #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="saveChange(agentForm.value)">
+
+      <div class="form-group">
+        <label for="agentName">Nama Agent</label>
+        <input formControlName="name" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="agentName">Email</label>
+        <input formControlName='email' class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="agentName">Contact</label>
+        <input formControlName="contactname" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="agentName">Alamat</label>
+        <input formControlName="address" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="agentName">Telepon</label>
+        <input formControlName="telepon" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark">Save</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+
 
 

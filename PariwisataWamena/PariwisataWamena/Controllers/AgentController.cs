@@ -24,7 +24,7 @@ namespace PariwisataWamena.Controllers {
             }
         }
 
-        [HttpGet ("id")]
+        [HttpGet ("{id}")]
         public async Task<IActionResult> Get (int id) {
             try {
                 var result = await context.Get (id);
@@ -38,6 +38,8 @@ namespace PariwisataWamena.Controllers {
         public async Task<IActionResult> Post ([FromBody] agent value) {
             try {
                 var userid= Convert.ToInt32(User.Identity.Name);
+                if (userid <= 0)
+                    throw new SystemException("UnAuthorize");
                 value.userid=userid;
                 var result = await context.Post (value);
                 return Ok (result);
@@ -46,9 +48,13 @@ namespace PariwisataWamena.Controllers {
             }
         }
 
-        [HttpPut ("id")]
+        [HttpPut ("{id}")]
         public async Task<IActionResult> Put (int id, [FromBody] agent value) {
             try {
+                var userid = Convert.ToInt32(User.Identity.Name);
+                if (userid <= 0)
+                    throw new SystemException("Unauthorize");
+                value.userid = userid;
                 var result = await context.Put (id, value);
                 return Ok (result);
             } catch (System.Exception ex) {
@@ -56,7 +62,7 @@ namespace PariwisataWamena.Controllers {
             }
         }
 
-        [HttpDelete ("id")]
+        [HttpDelete ("{id}")]
         public async Task<IActionResult> Delete (int id) {
             try {
                 var result = await context.Delete (id);

@@ -66,7 +66,9 @@ namespace PariwisataWamena.Services {
 
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
-                db.Users.Insert (user);
+                user.iduser=db.Users.InsertAndGetLastID(user);
+                if (user.iduser <= 0)
+                    user = null;
                 return Task.FromResult(user);
             }
         }

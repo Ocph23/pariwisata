@@ -23,7 +23,7 @@ namespace PariwisataWamena.Services {
         public async Task<bool> AddUserInRoleAsync (User user, string roleName) {
             using (var db = new DbContext ()) {
                 if (await RoleExsistsAsync (roleName)) {
-                    var result = db.Roles.Find (x => x.name.ToLower () == roleName.ToLower ());
+                    var result = db.Roles.Find (x => x.name == roleName);
                     if (result != null) {
                         if (db.UserRoles.Insert (new userinrole { iduser = user.iduser, idrole = result.idrole }))
                             return true;

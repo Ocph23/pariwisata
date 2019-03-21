@@ -9,7 +9,7 @@ import {debounceTime} from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['../authentification.component.scss','./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   private user: User;
