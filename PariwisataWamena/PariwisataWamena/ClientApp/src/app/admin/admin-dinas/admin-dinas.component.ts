@@ -71,7 +71,7 @@ export class AdminDinasComponent implements OnInit {
     }
     data.iduser = 1;
     data.type = ArticleType.Dinas;
-    this.dinasService.SaveArticle(data).then(x => {
+    this.dinasService.SaveArticle(data).subscribe(x => {
       console.log('saved');
 
     }, error => {console.log(error); });

@@ -4,15 +4,16 @@ import { AuthService } from '../auth.service';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators, FormBuilder  } from '@angular/forms';
 import { Subject } from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
+import { user } from 'src/app/models/models.component';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../authentification.component.scss','./login.component.scss']
+  styleUrls: ['../authentification.component.scss', './login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private user: User;
+  private user: user;
   loginForm: FormGroup;
   constructor(private auth: AuthService,  private router: Router, private fb: FormBuilder) {
     this.loginForm = fb.group({
@@ -43,11 +44,12 @@ export class LoginComponent implements OnInit {
     .subscribe(
       result => {
         this.auth.storage.addObject('user', result);
-        if (this.auth.IsInRole('Admin')) {
+        if (this.auth.IsInRole('admin')) {
           this.router.navigate(['/admin']);
-        } else if (this.auth.IsInRole('Agent')) {
+        } else if (this.auth.IsInRole('agent')) {
+          this.auth.getAgentProfile();
           this.router.navigate(['/agent']);
-        } else if (this.auth.IsInRole('Tourist')) {
+        } else if (this.auth.IsInRole('tourist')) {
           this.router.navigate(['/main']);
         } else {
 
@@ -58,22 +60,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  onSubmit() {
-  }
-}
-
-export interface User {
-  iduser: number;
-  username: string;
-  password: string;
-  avatar: string;
-  token: string;
-  roles: role[];
-  PasswordHash: string;
-  PasswordSalt: string;
-}
-
-export interface role {
-  idrole: number;
-  name: string;
 }

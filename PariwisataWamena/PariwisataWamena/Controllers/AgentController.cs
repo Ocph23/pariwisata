@@ -34,6 +34,27 @@ namespace PariwisataWamena.Controllers {
             }
         }
 
+        [HttpGet("profile")]
+        public async Task<IActionResult> GetAgentProfile()
+        {
+            try
+            {
+                var userid = Convert.ToInt32(User.Identity.Name);
+                if (userid <= 0)
+                    throw new SystemException("UnAuthorize");
+
+                var result = await context.GetByUserId(userid);
+                return Ok(result);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+
+
         [HttpPost]
         public async Task<IActionResult> Post ([FromBody] agent value) {
             try {

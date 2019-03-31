@@ -1,16 +1,25 @@
+<div >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Akomodasi Form</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="savePublish(form.value)">
+      <div class="form-group">
+        <label for="agentName">Judul</label>
+        <input formControlName="title" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="agentName">Content</label>
+        <angular-editor formControlName="draft" [config]="editorConfig"></angular-editor>
+      </div>
 
-<h1>Tambah {{Data.type}}</h1>
-<div class="createArticle">
- <label>Judul</label>
- <input class="form-control" placeholder="Title">
- 
- <label>Judul</label>
- <textarea class="form-control" placeholder="Content"></textarea>
- 
-<div class="comandarea">
-  <button class="btn btn-info">Publish</button>
-  <button class="btn btn-warning">Save As Draf</button>
-
-</div>
-
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark">Publis</button>
+        <button type="button" (click)="saveDraft(form.value)" class="btn btn-outline-dark">Save  Draft</button>
+      </div>
+    </form>
+  </div>
 </div>

@@ -10,7 +10,9 @@ using Ocph.DAL;
      [TableName("transaction")] 
      public class transaction 
    {
-          [PrimaryKey("idtransaction")] 
+        internal touris tourist;
+
+        [PrimaryKey("idtransaction")] 
           [DbColumn("idtransaction")] 
           public int idtransaction {  get; set;} 
 

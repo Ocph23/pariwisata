@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject, Input, SimpleChange } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ArticleType } from 'src/app/models/models.component';
+import { ArticleType, PanelArticle, article } from 'src/app/models/models.component';
+import { ArticleService } from '../article.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-kuliner',
@@ -11,27 +13,31 @@ import { ArticleType } from 'src/app/models/models.component';
 
 
 export class KulinerComponent implements OnInit {
-  public Kuliners: Article[];
-  searchText: string;
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Article[]>(baseUrl + 'api/Kuliner/Kuliners').subscribe(result => {
-      this.Kuliners = result;
-      const data = this.Kuliners[0];
-      console.log(data.title);
-    }, error => console.error(error));
-  }
+  public Data: PanelArticle = { selected: null, datas: [] };
+  source: article[];
+  constructor(public articleService: ArticleService, private router: Router) { }
+
   ngOnInit() {
+    this.articleService.getData(ArticleType.Kuliner).then(x => {
+      this.source = x.datas.filter( x => x.status === 'publish');
+      this.Data = x;
+      this.Data.datas= x.datas.filter( x => x.status === 'publish');
+    });
   }
 
-  onReciviedSearch(searchtext: string){
-    this.searchText=searchtext;
-      }
 
-}
+  showDetail(data: article) {
+    this.articleService.currentArticle = data;
+    this.router.navigate(['/home/detail']);
+  }
 
-interface Article {
-  title: string;
-  categories: any;
-  content: string;
-  foto: string;
+
+  onSearchHandle($event) {
+    if ($event) {
+      this.Data.datas = this.source.filter(x => x.title.includes($event) || x.content.includes($event));
+    } else {
+      this.Data.datas = this.source.copyWithin(this.source.length,1,this.source.length);
+    }
+  }
+
 }

@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
-import { ArrayType } from '@angular/compiler';
-import { article } from 'src/app/models/models.component';
+import { article, PanelArticle, ArticleType, IModalResult } from 'src/app/models/models.component';
+import { ArticleService } from 'src/app/home/article.service';
+import { FormGroup } from '@angular/forms';
+import { AlertService } from 'src/app/alert.service';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
+import { AdminAddArticleComponent } from '../admin-add-article/admin-add-article.component';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-admin-akomodasi',
@@ -12,14 +16,26 @@ import { article } from 'src/app/models/models.component';
 
 
 export class AdminAkomodasiComponent implements OnInit {
-private data: article;
-  constructor(private router: Router) { }
+  @ViewChild('swalMessage') swal: SwalComponent;
+ // @ViewChild(AdminAddArticleComponent) addArticle: AdminAddArticleComponent;
+  private Akomodasi: PanelArticle = { selected: null, datas: [] };
+    form:FormGroup;
+  constructor(
+    private router: Router,
+    private articleService: ArticleService,
+    private alertService: AlertService,
+    private modalService: NgbModal
+  ) { }
+  DataSelected: any;
 
   ngOnInit() {
- 
+
+    this.alertService.setSwal(this.swal);
+    this.articleService.getData(ArticleType.Akomodasi).then(x => {
+      this.Akomodasi = x;
+    })
   }
-
-
+  
 
   goTo (){
    
@@ -27,9 +43,24 @@ private data: article;
     this.router.navigate(['/admin/article',data]);
   }
 
-
-
-  public tests(){
-    
+  editItem(data: article) {
+    const ref = this.modalService.open(AdminAddArticleComponent, { size: 'lg' });
+    ref.componentInstance.form = this.articleService.createEditForm(data, "Akomodasi");
+    ref.result.then(x => {
+      var result = x as IModalResult;
+    });
   }
+
+
+
+  addNewItem(data: article) {
+    const ref = this.modalService.open(AdminAddArticleComponent, { size:'lg' })
+    ref.componentInstance.form = this.articleService.createNewForm("Akomodasi");
+    ref.result.then(x => {
+      var result = x as IModalResult;
+      this.alertService.success(null, "success");
+      this.Akomodasi.datas.push(result.data);
+    });
+  }
+
 }

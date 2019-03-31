@@ -13,17 +13,11 @@ public isExpanded: Boolean;
   }
 
   ngOnInit() {
-    //   if (!this.auth.hasLogin()) {
-    //     console.log('not have account');
-    //     this.router.navigate(['/login']);
-    // }
-    // console.log(' have account');
+    if (!this.auth.IsInRole('admin')) {
+         this.router.navigate(['/user/login']);
+     }
+     console.log('have account');
   }
-
-
-  public toggle()
-  {
-    
-  }
+  
 
 }

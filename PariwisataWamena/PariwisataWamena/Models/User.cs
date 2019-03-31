@@ -5,35 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 using Ocph.DAL;
 
-namespace PariwisataWamena.Models
-{
-    [TableName("user")]
-    public class User
-    {
-        [PrimaryKey("iduser")]
-        [DbColumn("iduser")]
+namespace PariwisataWamena.Models {
+    [TableName ("user")]
+    public class User {
+        [PrimaryKey ("iduser")]
+        [DbColumn ("iduser")]
         public int iduser { get; set; }
 
-        [DbColumn("username")]
+        [DbColumn ("username")]
         public string username { get; set; }
 
-        [DbColumn("password")]
+        [DbColumn ("password")]
         public string password { get; set; }
 
-        [DbColumn("avatar")]
+        [DbColumn ("avatar")]
         public byte[] avatar { get; set; }
 
-        [DbColumn("PasswordHash")]
+        [DbColumn ("PasswordHash")]
         public byte[] PasswordHash { get; set; }
 
-        [DbColumn("PasswordSalt")]
+        [DbColumn ("PasswordSalt")]
         public byte[] PasswordSalt { get; set; }
-        
+
         public string token { get; set; }
 
-        
         public IEnumerable<role> roles { get; set; }
 
+        public string name { get; set; }
 
     }
 }

@@ -39,7 +39,7 @@ namespace PariwisataWamena.Controllers {
                 var user = await _userService.Authenticate (userDto.username, userDto.password);
 
                 if (user == null)
-                   throw new SystemException("Username or password is incorrect");
+                    throw new SystemException ("Username or password is incorrect");
 
                 var tokenHandler = new JwtSecurityTokenHandler ();
                 var key = Encoding.ASCII.GetBytes (_appSettings.Secret);
@@ -55,12 +55,12 @@ namespace PariwisataWamena.Controllers {
 
                 // return basic user info (without password) and token to store client side
                 return Ok (new User {
-                    iduser = user.iduser, roles=user.roles, 
+                    iduser = user.iduser, roles = user.roles,
                         username = user.username,
                         token = tokenString, avatar = user.avatar
                 });
             } catch (System.Exception ex) {
-                 return BadRequest (new { message = ex.Message });
+                return BadRequest (new { message = ex.Message });
             }
         }
 
@@ -68,13 +68,52 @@ namespace PariwisataWamena.Controllers {
         [HttpPost ("register")]
         public async Task<IActionResult> Register ([FromBody] User userDto) {
             // map dto to entity
-            try {
-                // save 
-                var result = await _userService.Create (userDto, userDto.password);
-                return Ok (result);
-            } catch (AppException ex) {
-                // return error message if there was an exception
-                return BadRequest (new { message = ex.Message });
+            using (var db = new DbContext ()) {
+                var trans = db.BeginTransaction ();
+                try {
+
+                    var t = new Models.touris();
+                    t.email = userDto.username;
+                    t.name = userDto.name;
+                    t.idtouris= db.Tourist.InsertAndGetLastID (t);
+                    if (t.idtouris <= 0)
+                        throw new System.Exception ();
+
+                    UserService userService = new UserService ();
+                    string password = "MyPassword";
+                    User user = await userService.Create (new User { username = t.email, password = password }, password);
+
+                    if (user == null)
+                        throw new System.Exception ("Create User Error");
+                    
+                    t.iduser=user.iduser;
+
+                    string roleName = "tourist";
+                    UserRoleServices userRoleService = new UserRoleServices ();
+                    if (!await userRoleService.RoleExsistsAsync (roleName))
+                        await userRoleService.CreateRoleAsync (roleName);
+                    role roleItem = db.Roles.Find (x => x.name == roleName);
+
+                    if (roleItem == null)
+                        throw new System.Exception ($"Role {roleName} Not Found");
+
+                    if (!await userRoleService.AddUserInRoleAsync (user, roleName))
+                        throw new System.Exception ($"Error Add User To role  {roleName}");
+
+                    var emailService = new EmailServices ();
+                    await emailService.SendAsync (new IdentityMessage {
+                        Destination = t.email,
+                            Subject = "Verification Email", Body = $"User Name : {t.email} </br> Password:{password}"
+                    });
+
+                    trans.Commit ();
+
+                    return Ok(t);
+
+                } catch (AppException ex) {
+                    // return error message if there was an exception
+                    return BadRequest (new { message = ex.Message });
+                }
             }
         }
 

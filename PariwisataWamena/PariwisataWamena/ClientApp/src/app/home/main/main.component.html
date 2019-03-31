@@ -7,50 +7,21 @@
     <div style="text-align:center">
       <strong>SELAMAT DATANG</strong>
     </div>
-
   </div>
-
 </div>
 
-<div class="row">
 
-  <div class="col-md-8">
-    <div class="panel" *ngIf="Kuliner">
-      <div class="panelTitle orange">
-        <div class="titleText">
-          KULINER
-        </div>
-        <hr class="panelline" />
-      </div>
-      <div class="panelBody">
-        <div class="imgBody">
-          <img src="././assets/images/makanan1.jpg">
-          <div class="title">
-            <strong>{{dataService.Kuliners.selected.title}}</strong>
-          </div>
-          <div class="titleItem">
-            1 Minute Ago <span><strong>Admin</strong></span>
-          </div>
-        </div>
-        <div class="items">
-          <div class="item" *ngFor="let item of dataService.Kuliners.datas">
-            <img src="././assets/images/makanan2.jpg">
-            <div class="content">
-              <a [routerLink]='["/home/detail"]' (click)='onSelectArticle(item)'>
-                <h5>{{item.title}}</h5>
-              </a>
-              <div class="label label-orange">
-                <span>{{item.type}}</span>
-              </div>
-              <div class="label-content"> {{item.content}}</div>
-            </div>
-          </div>
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div *ngFor="let item of Datas">
+        <main-panel [DataPanel]="item"></main-panel>
       </div>
     </div>
-
-  </div>
-  <div class="col-md-4">
-
+    <div class="col-md-4">
+      <berita-panel></berita-panel>
+    </div>
+    
   </div>
 </div>
+

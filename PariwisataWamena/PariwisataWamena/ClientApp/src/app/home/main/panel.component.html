@@ -1,0 +1,39 @@
+<div class="panel" *ngIf="isActive" [class.orange]="DataPanel.title=='KULINER'"
+  [class.blue]="DataPanel.title=='DESTINASI'" [class.green]="DataPanel.title=='AKOMODASI'">
+  <div class="panelTitle">
+    <div class="titleText">
+      {{DataPanel.title}}
+    </div>
+    <hr class="panelline" />
+  </div>
+  <div class="panelBody">
+    <div class="imgBody">
+      <img [src]="DataPanel.Data.selected.thumb">
+      <div class="title">
+        <strong>{{DataPanel.Data.selected.title}}</strong>
+      </div>
+      <div class="titleItem">
+        1 Minute Ago <span><strong>Admin</strong></span>
+      </div>
+    </div>
+    <div class="items">
+      <div class="item" *ngFor="let item of DataPanel.Data.datas">
+       <div class="imageCard">
+          <img [src]="item.thumb">
+       </div>
+        <div class="content">
+          <a [routerLink]='["/home/detail"]' (click)='onSelectArticle(item)'>
+            <h5>{{item.title}}</h5>
+          </a>
+          <div class="label" [class.label-orange]="item.type=='Kuliner'" [class.label-purple]="item.type=='Berita'"
+            [class.label-green]="item.type=='Akomodasi'" [class.label-blue]="item.type=='Destinasi'">
+            <span>{{item.type}}</span>
+          </div> Admin, {{item.createdate | date : 'd MMM y'}}
+          <div class="label-content"> {{item.desc}} <a (click)='onSelectArticle(item)'><strong>Read
+              More....</strong></a></div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,16 +10,16 @@ import { PanelArticle, article, ArticleType } from 'src/app/models/models.compon
 export class DinasComponent implements OnInit {
   page: article;
 
-  Data: PanelArticle;
+  Data: PanelArticle = { selected: null, datas: [] };
   notFound: article = { title: 'Data Tidak Ditemukan' } as article;
   Datas: article[];
 
   constructor(private articleService: ArticleService) {
-   this.articleService.getData(ArticleType.Dinas).then(x=>{
-    this.Data= x;
+   this.articleService.getData(ArticleType.Dinas).then(x => {
+    this.Data = x;
     this.onClickProfile();
     });
-  
+
   }
 
  ngOnInit() {
@@ -27,32 +27,33 @@ export class DinasComponent implements OnInit {
   }
 
   onClickProfile() {
-    this.view("profile");
+    this.view('profile');
   }
 
-  
+
   onClickVisiMisi() {
-    this.view("visi");
+    this.view('visi');
   }
 
-  
+
   onClickStruktur() {
-    this.view("structure");
+    this.view('structure');
   }
 
-  
+
   onClickKontak() {
-    this.view("contact");
+    this.view('contact');
   }
 
 
 
   private view(data: string) {
-    var selected = this.Data.datas.find(x => x.title.toLowerCase() == data.toLowerCase());
-    if (selected)
+    const selected = this.Data.datas.find(x => x.title.toLowerCase() === data.toLowerCase());
+    if (selected) {
       this.page = selected;
-    else
+    } else {
       this.page = this.notFound;
+    }
   }
 
 }

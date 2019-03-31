@@ -8,7 +8,7 @@ import swal, { SweetAlertType } from 'sweetalert2';
 
 
 export class AlertService {
-  private title: string = 'info';
+  private title = 'info';
   private  message: string;
   private  type: SweetAlertType;
   private swal: SwalComponent;
@@ -28,7 +28,7 @@ export class AlertService {
 
 
   info(title, message) {
-    (!title ? this.setTitle(Kind.success) : this.title = title);
+    (!title ? this.setTitle(Kind.info) : this.title = title);
     this.swal.type = 'info';
     this.message = message;
     this.show();
@@ -36,7 +36,7 @@ export class AlertService {
 
 
   warning(title, message) {
-    (!title ? this.setTitle(Kind.success) : this.title = title);
+    (!title ? this.setTitle(Kind.warning) : this.title = title);
     this.swal.type = 'warning';
     this.message = message;
     this.show();
@@ -44,8 +44,8 @@ export class AlertService {
 
 
 
-  error(title, message) {
-    (!title ? this.setTitle(Kind.success) : this.title = title);
+  error(title: string, message: string) {
+    (!title ? this.setTitle(Kind.error) : this.title = title);
     this.swal.type = 'error';
     this.message = message;
     this.show();
@@ -55,7 +55,7 @@ export class AlertService {
 
 
   question(title, message) {
-    (!title ? this.setTitle(Kind.success) : this.title = title);
+    (!title ? this.setTitle(Kind.question) : this.title = title);
     this.swal.type = 'question';
     this.message = message;
     this.show();
@@ -87,7 +87,7 @@ export class AlertService {
         this.title = 'Info';
     }
   }
-  
+
 }
 
 

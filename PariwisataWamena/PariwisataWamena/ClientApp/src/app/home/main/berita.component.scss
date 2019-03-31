@@ -1,0 +1,14 @@
+.items {
+  .item {
+    min-height: 85px;
+    margin-bottom: 10px !important;
+    .imageCard{
+      position: relative !important;
+      height: 110px !important;
+      width: 100% !important;
+    }
+    .content {
+      margin-left: 0px !important;
+    }
+  }
+}

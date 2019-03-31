@@ -29,10 +29,10 @@ namespace PariwisataWamena
         public IRepository<role> Roles { get { return new Repository<role>(this); } }
         public IRepository<userinrole> UserRoles { get { return new Repository<userinrole>(this); } }
         public IRepository<article> Article { get { return new Repository<article>(this); } }
-
         public IRepository<layanan> Layanan { get { return new Repository<layanan>(this); } }
-
-           public IRepository<agent> Agent { get { return new Repository<agent>(this); } }
+        public IRepository<agent> Agent { get { return new Repository<agent>(this); } }
+        public IRepository<touris> Tourist { get { return new Repository<touris>(this); } }
+        public IRepository<transaction> Transactions { get { return new Repository<transaction>(this); } }
 
     }
 }

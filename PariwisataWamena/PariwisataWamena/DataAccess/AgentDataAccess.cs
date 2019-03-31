@@ -3,6 +3,8 @@ using System.Security.Cryptography.X509Certificates;
 using PariwisataWamena.Models;
 using System.Collections.Generic;
 using PariwisataWamena.Services;
+using System;
+using System.Linq;
 
 namespace PariwisataWamena.DataAccess
 {
@@ -74,10 +76,41 @@ namespace PariwisataWamena.DataAccess
             }
         }
 
+        internal Task<agent> GetByUserId(int userid)
+        {
+            try
+            {
+                using (var db = new DbContext())
+                {
+                    var result = db.Agent.Find(O => O.userid == userid);
+                    if(result!=null)
+                    {
+                        result.Layanans = db.Layanan.Where(O => O.idagent == result.idagent).ToList();
+                        result.Transactions = (from a in result.Layanans
+                                          join b in db.Transactions.Select() on a.idservice equals b.idservice
+                                          join c in db.Tourist.Select() on b.idtouris equals c.idtouris
+                                          select new transaction { count = b.count, end = b.end, idservice = b.idservice,
+                                              idtouris = b.idtouris, idtransaction = b.idtransaction, payment = b.payment,
+                                              start = b.start, tourist = c }).ToList();
+
+                        return Task.FromResult(result);
+                    }
+                    else
+                    {
+                        throw new SystemException("Data Not Found");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new SystemException(ex.Message);
+            }
+        }
+
         public Task<bool> Put (int id, agent t) {
             using (var db = new DbContext())
             {
-                if(db.Agent.Update(x=> new {x.address,x.contactName,x.name,x.telepon},t,x=>x.idagent==t.idagent))
+                if(db.Agent.Update(x=> new {x.address,x.contactName,x.name,x.telepon, x.profile},t,x=>x.idagent==t.idagent))
                 {
                     return Task.FromResult(true);
                 }

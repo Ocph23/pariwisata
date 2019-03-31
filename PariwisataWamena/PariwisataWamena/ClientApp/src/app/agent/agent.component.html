@@ -1,43 +1,50 @@
 <div class="body">
   <header>
-          <nav class='navbar navbar-expand-sm navbar-toggleable-sm  
+    <nav class='navbar navbar-expand-sm navbar-toggleable-sm
           border-bottom box-shadow sm-1 text-primary'>
-           <div class="row">
-             <a class="navbar-brand" [routerLink]='["/"]'>DINAS PARIWISATA JAYAWIJAYA</a>
-             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-               [attr.aria-expanded]="isExpanded" (click)="toggle()">
-               <span class="navbar-toggler-icon"></span>
-             </button>
-           </div>
-         </nav>
-      </header>
-<div class="container-fluid h-100">
-  <div class="row h-100">
+      <div class="row">
+        <a class="navbar-brand" [routerLink]='["/"]'>DINAS PARIWISATA JAYAWIJAYA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
+                [attr.aria-expanded]="isExpanded" (click)="toggle()">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+    <div class="headercontainer">
+      <img src="../assets/images/photo1.png" alt="Cinque Terre">
+      <div class="center">
+        <h1>{{Datas.name}}</h1>
+      </div>
+    </div>
+  </header>
+ 
+  <div class="container-fluid h-100">
+    <div class="row h-100">
       <aside class="col-12 col-md-2 p-0 bg-dark">
-          <nav class="navbar navbar-expand navbar-dark bg-dark flex-md-column flex-row align-items-start py-2">
-              <div class="collapse navbar-collapse">
-                  <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
-                      <li class="nav-item">
-                          <a class="nav-link pl-0 text-nowrap" href="#"><i class="fa fa-bullseye fa-fw"></i> <span class="font-weight-bold">Brand</span></a>
-                      </li>
-                      <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-                              <a class="nav-link" [routerLink]='["/agent/layanan"]'>Layanan</a>
-                      </li>
-                      <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-                              <a class="nav-link" [routerLink]='["/agent/transaksi"]'>Transaksi</a>
-                      </li>
-                      <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-                              <a class="nav-link" [routerLink]='["/admin/kontak"]'>Kontak</a>
-                      </li> 
-                  </ul>
-              </div>
-          </nav>
+        <nav class="navbar navbar-expand navbar-dark bg-dark flex-md-column flex-row align-items-start py-2">
+          <div class="collapse navbar-collapse">
+            <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+              <li class="nav-item">
+                <a class="nav-link pl-0 text-nowrap" href="#"><i class="fa fa-bullseye fa-fw"></i> <span class="font-weight-bold">Brand</span></a>
+              </li>
+              <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+                <a class="nav-link" [routerLink]='["/agent/layanan"]'>Layanan</a>
+              </li>
+              <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+                <a class="nav-link" [routerLink]='["/agent/transaksi"]'>Transaksi</a>
+              </li>
+              <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+                <a class="nav-link" [routerLink]='["/agent/profile",Datas]'>Profile</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
       </aside>
       <main class="col bg-faded py-3">
-         <div class="main">
-              <router-outlet></router-outlet>
-         </div>
+        <div class="main">
+          <router-outlet></router-outlet>
+        </div>
       </main>
+    </div>
   </div>
-</div>
 </div>

@@ -1,68 +1,49 @@
-<h2>KULINER</h2>
+<h2>AKOMODASI</h2>
+{{Data}}
 <div class="adminpanel">
-   
   <div class="row">
-    <div class="panel">
-      <div class="panelBody">
-        <div class="imgBody">
-          <img src="././assets/images/makanan1.jpg">
-          <div class="title">
-            <div class="label label-blue">
-              <span>Publish</span>
-            </div>
-          </div>
-          <div class="titleItem">
-            <h6>Judul</h6>
-          </div>
-        </div>
-        <div class="items">
-          <div class="item">
-            <div class="adminContent">
-
-              <div class="label-content"> ini adalah content dari isi</div>
-              <div class="dateItem">
-                1 Minute Ago <span><strong>Admin</strong></span>
+    <div class="col-md-4" *ngFor="let item of Akomodasi.datas">
+      <div class="panel border box-shadow sm-2">
+        <div class="panelBody ">
+          <div class="imgBody">
+            <img [src]="item.thumb">
+            <div class="menuIcon" placement="bottom-right" ngbDropdown #myDrop="ngbDropdown">
+              <a class="btn" id="dropdownManual" ngbDropdownToggle></a>
+              <div class="dropdown" ngbDropdownMenu aria-labelledby="dropdownManual">
+                <a class="btn" style="display:block" (click)="editItem(item)" ngbDropdownItem>Edit</a>
+                <a class="btn" (click)="savePublish(item)" ngbDropdownItem>Publish</a>
+                <a class="btn" (click)="saveUnpublish(item)" ngbDropdownItem>Unpublish</a>
               </div>
-
+            </div>
+            <div class="title">
+              <div class="label"  [class.label-orange]="item.type=='Kuliner'"
+              [class.label-blue]="item.type=='Destinasi'"
+               [class.label-green]="item.type=='Akomodasi'">
+                <span>{{item.status}}</span>
+              </div>
+            </div>
+            <div class="titleItem">
+              <h4>{{item.title}}</h4>
             </div>
           </div>
-
+          <div class="items">
+            <div class="item" style="min-height:0px;background-color:transparent !important">
+              <div class="adminContent" style="height:50px !important">
+                <div class="label-content"> ini adalah Baru dari isi</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="panel">
-      <div class="panelBody">
-        <div class="imgBody">
-          <img src="././assets/images/makanan1.jpg">
-          <div class="title">
-            <div class="label label-blue">
-              <span>Publish</span>
-            </div>
-          </div>
-          <div class="titleItem">
-            <h6>Judul</h6>
-          </div>
-        </div>
-        <div class="items">
-          <div class="item">
-            <div class="adminContent">
-
-              <div class="label-content"> ini adalah content dari isi</div>
-              <div class="dateItem">
-                1 Minute Ago <span><strong>Admin</strong></span>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  
   </div>
-  
 
-  <div class="addItem">
-      <i class="material-icons btn" (click)="tests()">add_circle</i>
-    </div>
+</div>
+
+<swal #swalMessage title="" text="" type="info" [showCancelButton]="false"></swal>
+
+
+
+<div class="addItem">
+  <i class="material-icons btn" (click)="addNewItem(content)">add_circle</i>
 </div>

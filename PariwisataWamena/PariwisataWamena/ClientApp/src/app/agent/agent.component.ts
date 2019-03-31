@@ -10,22 +10,20 @@ import { Router } from '@angular/router';
 
 export class AgentComponent implements OnInit {
   isExpanded: Boolean;
-  constructor(private authService: AuthService, router: Router) {
-    if (!authService.hasLogin()) {
-        router.navigate(['account/login']);
-     }
+  private Datas: any;
+  constructor(private auth: AuthService, private router: Router) {
+    if (!this.auth.IsInRole('agent')) {
+      this.router.navigate(['/user/login']);
+    } else {
+      this.auth.getAgentProfile().subscribe(x => {
+        this.Datas = x;
+      });
+    }
   }
 
   ngOnInit() {
-
-
-
+   
   }
 
-
-
-  toggle() {
-
-  }
-
+  
 }

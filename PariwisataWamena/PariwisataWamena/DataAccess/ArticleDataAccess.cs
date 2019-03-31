@@ -35,13 +35,12 @@ namespace PariwisataWamena.DataAccess
                                  join b in db.Users.Select() on a.iduser equals b.iduser
                                  select new article
                                  {
-                                     title = a.title,
+                                     title = a.title, 
                                      content = a.content,
                                      createdate = a.createdate,
                                      status = a.status,
                                      idarticle = a.idarticle,
                                      iduser = a.iduser,
-                                     tags = a.tags,
                                      thumb = a.thumb,
                                      type = a.type,
                                      user = b,
@@ -74,7 +73,6 @@ namespace PariwisataWamena.DataAccess
                                      status = a.status,
                                      idarticle = a.idarticle,
                                      iduser = a.iduser,
-                                     tags = a.tags,
                                      thumb = a.thumb,
                                      type = a.type,
                                      user = b,

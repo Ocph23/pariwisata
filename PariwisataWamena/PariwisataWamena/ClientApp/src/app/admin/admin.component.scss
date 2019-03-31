@@ -5,7 +5,6 @@
     padding-top: 50px;
   }
 
-
   .panelMenu {
     position: absolute;
     right: 5px;
@@ -75,6 +74,7 @@
   }
 }
 
+
 .menuIcon {
   margin: 0px;
   right: 5px;
@@ -102,10 +102,10 @@ header {
 }
 
 .panel {
-  width: 25%;
-  float: left;
-
+  width: 100%;
+  margin-top: 20px;
 }
+
 
 .imgBody {
   img {

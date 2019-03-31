@@ -39,7 +39,7 @@ namespace PariwisataWamena.Controllers {
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Post ([FromBody] article model) {
+        public async Task<IActionResult> Post ([FromBody]article model) {
             try {
 
                 if (model == null)
@@ -61,7 +61,7 @@ namespace PariwisataWamena.Controllers {
 
         [Authorize]
         [HttpPut ("{id}")]
-        public async Task<IActionResult> Put (int id, [FromBody] article item) {
+        public async Task<IActionResult> Put (int id, [FromBody]article item) {
             try {
                 if (id <= 0 || item == null) {
                     throw new SystemException ("model isnull");

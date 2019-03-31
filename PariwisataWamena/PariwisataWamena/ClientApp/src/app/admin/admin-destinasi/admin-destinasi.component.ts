@@ -1,66 +1,59 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { article, PanelArticle, ArticleType } from 'src/app/models/models.component';
+import { article, PanelArticle, ArticleType, IModalResult } from 'src/app/models/models.component';
 import { ArticleService } from 'src/app/home/article.service';
 import { AlertService } from 'src/app/alert.service';
 import { SwalComponent } from '@toverux/ngx-sweetalert2';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { AuthService } from 'src/app/authentification/auth.service';
+import { FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient } from '@angular/common/http';
+import { AdminAddArticleComponent } from '../admin-add-article/admin-add-article.component';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-admin-destinasi',
   templateUrl: './admin-destinasi.component.html',
   styleUrls: ['../admin.component.scss', './admin-destinasi.component.scss']
 })
-export class AdminDestinasiComponent implements OnInit {
-  @ViewChild('swalMessage') private swalMessage: SwalComponent;
-  public destinasi:PanelArticle;
-    form:FormGroup;
 
+
+export class AdminDestinasiComponent implements OnInit {
+  @ViewChild('swalMessage') swal: SwalComponent;
+  // @ViewChild(AdminAddArticleComponent) addArticle: AdminAddArticleComponent;
+  private Akomodasi: PanelArticle = { selected: null, datas: [] };
+  form: FormGroup;
   constructor(
-    private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string,
-    private fb: FormBuilder,
-    private modalService: NgbModal,
-    private auth: AuthService,
+    private router: Router,
     private articleService: ArticleService,
     private alertService: AlertService,
-  ) {
-   // this.alertService.setSwal(this.swalMessage);
-    this.articleService.getData(ArticleType.Destinasi).then(x => {
-      this.destinasi = x;
-    });
-  }
+    private modalService: NgbModal
+  ) { }
+  DataSelected: any;
 
   ngOnInit() {
-    
-    this.load();
+
+    this.alertService.setSwal(this.swal);
+    this.articleService.getData(ArticleType.Destinasi).then(x => {
+      this.Akomodasi = x;
+    })
   }
 
-  private load() {
-  
-
-  }
-
-  public addItem(data) {
-
-  }
-
-
-  editItem(data, content) {
-    this.form = this.fb.group({
-      'idarticle': [data.idarticle],
-      'title': [data.title, Validators.required],
-      'content': [data.content, Validators.required],
-      'type': ['Desinasi', Validators.required],
-      'createdate': [data.createdate, Validators.required],
-      'status': [data.status, Validators.required],
-      'draft': [data.draft, Validators.required],
+  editItem(data: article) {
+    const ref = this.modalService.open(AdminAddArticleComponent, { size: 'lg' });
+    ref.componentInstance.form = this.articleService.createEditForm(data, "Destinasi");
+    ref.result.then(x => {
+      var result = x as IModalResult;
     });
-    this.modalService.open(content);
   }
 
 
 
+  addNewItem(data: article) {
+    const ref = this.modalService.open(AdminAddArticleComponent, { size: 'lg' })
+    ref.componentInstance.form = this.articleService.createNewForm("Destinasi");
+    ref.result.then(x => {
+      var result = x as IModalResult;
+      this.alertService.success(null, "success");
+      this.Akomodasi.datas.push(result.data);
+    });
+  };
 }

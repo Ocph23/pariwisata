@@ -1,0 +1,32 @@
+<div class="panel" *ngIf="isActive">
+  <div class="panelTitle purple">
+      <div class="titleText">
+      BERITA
+    </div>
+    <hr class="panelline" />
+  </div>
+  <div class="panelBody">
+    <div class="items">
+      <div class="item" *ngFor="let item of DataPanel.datas">
+          <div class="imageCard">
+              <img [src]="item.thumb">
+           </div>
+        <div class="content">
+          <a [routerLink]='["/home/detail"]' (click)='onSelectArticle(item)'>
+            <h5>{{item.title}}</h5>
+          </a>
+          <div class="label"
+               [class.label-orange]="item.type=='KULINER'"
+               [class.label-purple]="item.type=='Berita'"
+               [class.label-purple]="item.type=='Akomodasi'">
+            <span>{{item.type}}</span>
+          </div> Admin, {{item.createdate | date : 'd MMM y'}}
+          <div class="label-content"> {{item.desc}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

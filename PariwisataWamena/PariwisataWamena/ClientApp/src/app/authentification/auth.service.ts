@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
-import { User } from './login/login.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { user } from '../models/models.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
 export class AuthService {
   // tslint:disable-next-line: no-use-before-declare
   public storage: StorageHelper.LocalStorageWorker = new StorageHelper.LocalStorageWorker();
-  private token: User;
+  private token: user;
   constructor(
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
@@ -29,8 +29,13 @@ export class AuthService {
       .post<any>(this.baseUrl + 'account/authenticate', user, httpOptions);
   }
 
+  getAgentProfile() {
+    return this.http.get<any>(this.baseUrl + 'api/agent/profile', this.getHttpHeader());
+  }
+
+
   public hasLogin() {
-    if (this.storage.get('token') != null) {
+    if (this.getToken() != null) {
       return true;
     } else {
       return false;
@@ -39,9 +44,8 @@ export class AuthService {
 
   public getToken(): string {
     const user = this.storage.getObject('user');
-    const inrole = this.IsInRole('Admin');
-    const token = user.token;
-    if (token != null) {
+    if (user != null) {
+      const token = user.token;
       return token;
     } else {
       return null;
@@ -56,12 +60,17 @@ export class AuthService {
         const httpOptions = {
           headers: new HttpHeaders({
             'Content-Type': 'application/json',
-            'Authorization' : 'Bearer ' + token
+            'Authorization': 'Bearer ' + token
           })
         };
         return httpOptions;
-      } else { 
-        throw new Error('You Not Have Access');
+      } else {
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+          })
+        };
+        return httpOptions;
       }
     } catch (error) {
       throw new Error(error);
@@ -72,16 +81,20 @@ export class AuthService {
 
 
   public IsInRole(item: string): boolean {
-    const user = this.storage.getObject('user');
-    let found = false;
-    if (user.roles != null) {
-      user.roles.forEach(element => {
-        if (element.name === item) {
-          found = true;
-        }
-      });
+    try {
+      const user = this.storage.getObject('user');
+      let found = false;
+      if (user.roles != null) {
+        user.roles.forEach(element => {
+          if (element.name === item) {
+            found = true;
+          }
+        });
+      }
+      return found;
+    } catch (e) {
+      this.router.navigate(['user']);
     }
-    return found;
   }
 }
 

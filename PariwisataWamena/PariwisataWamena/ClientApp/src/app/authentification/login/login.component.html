@@ -1,26 +1,53 @@
 <body>
-  <div id="login">
-      <div class="container">
-            <form [formGroup]="loginForm" id="login-form" class="form" (ngSubmit)="login(loginForm.value)">
-                    <h3 class="text-center text-info">Login</h3>
-                    <div class="form-group">
-                        <label for="username" class="text-info">Username:</label><br>
-                        <input formControlName='userName' type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="text-info">Password:</label><br>
-                        <input formControlName='password' type="text" name="password" id="password" class="form-control">
-                    </div>
-                    <ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">{{message}}</ngb-alert>
-                    <div class="form-group">
-                         
-                        <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
-                        <input type="submit" name="submit" class="btn btn-info btn-md" value="submit"  [disabled]="!loginForm.valid">
-                    </div>
-                    <div id="register-link" class="text-right">
-                        <a href="#" class="text-info" >Register saja</a>
-                    </div>
-                </form>
+  <div id="login" class="row" style="background-color:red;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 ">
+              
+                <div class="logo">
+                        <h3 class="text-center text-info">Dinas Pariwisata</h3>
+                        <h3 class="text-center text-info">Jayawijaya </h3>
+                </div>
+        </div>
+        <div class="col-md-7">
+                <h2 class="text-left text-info">Login</h2>
+          <form [formGroup]="loginForm" id="login-form" class="form" (ngSubmit)="login(loginForm.value)">
+        
+            <div class="form-group">
+              <label for="username" class="text-info">Username:</label><br>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input formControlName='userName' type="text"  class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="text-info">Password:</label><br>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input formControlName='password' type="password" class="form-control">
+              </div>
+            </div>
+
+            <ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">{{message}}</ngb-alert>
+            <div class="form-group">
+
+              <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me"
+                    name="remember-me" type="checkbox"></span></label><br>
+              <input type="submit" name="submit" class="btn btn-info btn-md" value="Login"
+                [disabled]="!loginForm.valid">
+            </div>
+            <div id="register-link" class="text-right">
+              <a href="/user/register" class="text-info">Register</a>
+            </div>
+          </form>
+        </div>
       </div>
+
+    </div>
   </div>
 </body>

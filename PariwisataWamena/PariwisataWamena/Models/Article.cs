@@ -7,7 +7,7 @@ using Ocph.DAL;
 
 namespace PariwisataWamena.Models
 {
-    [TableName("article")]
+    [TableName("content")]
     public class article
     {
         [PrimaryKey("idarticle")]
@@ -30,7 +30,7 @@ namespace PariwisataWamena.Models
         public DateTime createdate { get; set; }
 
         [DbColumn("thumb")]
-        public byte[] thumb { get; set; }
+        public string thumb { get; set; }
 
         [DbColumn("iduser")]
         public int iduser { get; set; }
@@ -39,8 +39,6 @@ namespace PariwisataWamena.Models
         [DbColumn("status")]
         public string status { get; set; }
 
-
-        public IEnumerable<string> tags { get; set; }
         public User user { get; set; }
     }
 }
