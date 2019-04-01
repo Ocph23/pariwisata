@@ -9,7 +9,28 @@
                 "build",
                 "${workspaceFolder}/PariwisataWamena.csproj"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/PariwisataWamena.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/PariwisataWamena.csproj"
+            ],
+            "problemMatcher": "$tsc"
         }
     ]
 }

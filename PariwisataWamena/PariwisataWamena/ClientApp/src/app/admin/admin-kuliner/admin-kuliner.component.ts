@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SwalComponent } from '@toverux/ngx-sweetalert2';
+import { SwalComponent }  from '@sweetalert2/ngx-sweetalert2';
 import { PanelArticle, ArticleType, article, IModalResult } from 'src/app/models/models.component';
 import { FormGroup } from '@angular/forms';
 import { ArticleService } from 'src/app/home/article.service';

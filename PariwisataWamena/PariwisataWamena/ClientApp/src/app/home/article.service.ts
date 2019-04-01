@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { article, PanelArticle, ArticleType } from '../models/models.component';
+import { article, PanelArticle, ArticleType, agent, layanan } from '../models/models.component';
 import { AuthService } from '../authentification/auth.service';
 import { delay } from 'q';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -37,14 +37,14 @@ export class ArticleService {
               result => {
                 this.instance = true;
                 result.forEach(x => {
-                  x.desc = x.content.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 200);
-                  let html = document.createElement('html');
+                  x.desc = x.content.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 200);
+                  const html = document.createElement('html');
                   html.innerHTML = x.content;
-                  var imgs = html.getElementsByTagName("img")[0];
-                  if (imgs != null)
+                  const imgs = html.getElementsByTagName('img')[0];
+                  if (imgs != null) {
                     x.thumb = imgs.src;
-                  else {
-                    x.thumb = "/uploads/noimage.jpg";
+                  } else {
+                    x.thumb = '/uploads/noimage.jpg';
                   }
                 });
                 this.Data = result;
@@ -106,7 +106,7 @@ export class ArticleService {
 
 
   publish(data: number) {
-    
+
   }
 
 
@@ -120,13 +120,13 @@ export class ArticleService {
   createNewForm(type: string) {
     return this.fb.group({
       'idarticle': 0,
-      'title': ["", Validators.required],
-      'content': ["", Validators.required],
-      'thumb': ["", Validators.required],
+      'title': ['', Validators.required],
+      'content': ['', Validators.required],
+      'thumb': ['', Validators.required],
       'type': [type, Validators.required],
       'createdate': [new Date(), Validators.required],
-      'status': ["draft", Validators.required],
-      'draft': ["", Validators.required],
+      'status': ['draft', Validators.required],
+      'draft': ['', Validators.required],
     });
   }
 
@@ -135,7 +135,7 @@ export class ArticleService {
       'idarticle': [data.idarticle],
       'title': [data.title, Validators.required],
       'content': [data.content, Validators.required],
-      'thumb': ["", Validators.required],
+      'thumb': ['', Validators.required],
       'type': [type, Validators.required],
       'createdate': [data.createdate, Validators.required],
       'status': [data.status, Validators.required],
@@ -147,22 +147,147 @@ export class ArticleService {
 
   public getImagesFromContent(content: string): string[] {
 
-    let list = [];
+    const list = [];
 
-    let html = document.createElement('html');
+    const html = document.createElement('html');
     html.innerHTML = content;
-    var imgs = html.getElementsByTagName("img");
+    const imgs = html.getElementsByTagName('img');
 
     for (let i = 0; i < imgs.length; i++) {
-      var data = imgs.item(i);
+      const data = imgs.item(i);
       list.push(data.src);
     }
 
     return list;
-   
+
   }
 
   public GetRandomArticle(datas: article[]) {
     return datas[Math.floor(Math.random() * datas.length)];
   }
+}
+
+
+export class AgentService {
+
+  private instance = false;
+  public source: agent[];
+  sourceLayanan: layanan[];
+  
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string,
+    private router: Router, private auth: AuthService) {
+    this.get();
+  }
+  
+  saveNewLayanan(model: layanan){
+    try {
+      if (model.idservice !== undefined && model.idservice > 0) {
+        return this.http.put<layanan>(this.baseUrl + 'api/Service?id=' + model.idservice, model, this.auth.getHttpHeader());
+      } else {
+        return this.http.post<layanan>(this.baseUrl + 'api/service', model, this.auth.getHttpHeader());
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
+  public getLayanan() {
+    return new Promise<layanan[]>((p, r) => {
+      try {
+        if (!this.instance) {
+          this.http
+            .get<layanan[]>(this.baseUrl + 'api/service', this.auth.getHttpHeader())
+            .subscribe(
+              result => {
+                this.instance = true;
+                result.forEach(x => {
+                  x.desc = x.content.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 200);
+                  const html = document.createElement('html');
+                  html.innerHTML = x.content;
+                  const imgs = html.getElementsByTagName('img')[0];
+                  if (imgs != null) {
+                    x.thumb = imgs.src;
+                  } else {
+                    x.thumb = '/uploads/noimage.jpg';
+                  }
+                });
+                this.sourceLayanan = result;
+                p(result);
+              },
+              error => {
+                throw new Error(error);
+              }
+            );
+        } else {
+          p(this.sourceLayanan);
+        }
+      } catch (error) {
+        r(error);
+      }
+    });
+  }
+
+  public get() {
+    return new Promise<agent[]>((p, r) => {
+      try {
+        if (!this.instance) {
+          this.http
+            .get<agent[]>(this.baseUrl + 'api/agent', this.auth.getHttpHeader())
+            .subscribe(
+              result => {
+                this.instance = true;
+                result.forEach(x => {
+                  x.desc = x.profile.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 200);
+                  const html = document.createElement('html');
+                  html.innerHTML = x.profile;
+                  const imgs = html.getElementsByTagName('img')[0];
+                  if (imgs != null) {
+                    x.thumb = imgs.src;
+                  } else {
+                    x.thumb = '/uploads/noimage.jpg';
+                  }
+                }); 
+                this.source = result;
+                p(result);
+              },
+              error => {
+                throw new Error(error);
+              }
+            );
+        } else {
+          p(this.source);
+        }
+      } catch (error) {
+        r(error);
+      }
+    });
+  }
+
+  createNewLayananForm() {
+    return this.fb.group({
+      'active': [true],
+      'idagent': [0, Validators.required],
+      'content': ['', Validators.required],
+      'idservice': [0, Validators.required],
+      'name': ['', Validators.required],
+      'price': [0, Validators.required],
+    });
+  }
+
+  createEditLayananForm(data: layanan) {
+    return this.fb.group({
+      'active': [data.active],
+      'idagent': [data.idagent, Validators.required],
+      'content': [data.content, Validators.required],
+      'idservice': [data.idservice, Validators.required],
+      'name': [data.name, Validators.required],
+      'price': [data.price, Validators.required],
+    });
+  }
+
+
 }

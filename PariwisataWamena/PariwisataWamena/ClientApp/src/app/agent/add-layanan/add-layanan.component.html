@@ -1,12 +1,12 @@
-<div >
+<div>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Tambah Layanan</h4>
+    <h4 class="modal-title" id="modal-basic-title">Tambah Paket Layanan</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="form" (ngSubmit)="savePublish(form.value)">
+    <form [formGroup]="form" (ngSubmit)="saveItem(form.value)">
       <div class="form-group">
         <label for="agentName">Judul</label>
         <input formControlName="title" class="form-control">
@@ -15,10 +15,8 @@
         <label for="agentName">Content</label>
         <angular-editor formControlName="draft" [config]="editorConfig"></angular-editor>
       </div>
-
       <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-dark">Publis</button>
-        <button type="button" (click)="saveDraft(form.value)" class="btn btn-outline-dark">Save  Draft</button>
+        <button type="submit" class="btn btn-outline-dark">Save</button>
       </div>
     </form>
   </div>

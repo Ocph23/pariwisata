@@ -1,33 +1,36 @@
 <div class="header">
-    <img src="././assets/images/cover4.jpg">
-    <div class="search">
-        <app-search (searchEvent)="onSearchHandle($event)"></app-search>
-    </div>
-    <div class="title">
-      <div style="text-align:center">
-        <strong>AGENT PERJALANAN</strong>
-      </div>
+  <img src="././assets/images/cover4.jpg">
+  <div class="search">
+    <app-search (searchEvent)="onSearchHandle($event)"></app-search>
+  </div>
+  <div class="title">
+    <div style="text-align:center">
+      <strong>AGENT PERJALANAN</strong>
     </div>
   </div>
-  
-  <div class="container">
+</div>
+
+<div class="container">
+ <div class="row">
+  <div class="col-md-7">
     <div class="panel">
+      <h2>Paket Perjalanan</h2>
       <div class="panelBody">
         <div class="items">
-          <div class="item" *ngFor="let item of Data.datas">
-              <div class="imageCard">
-                  <img [src]="item.thumb">
-               </div>
+          <div class="item" *ngFor="let item of Data">
+            <div class="imageCard">
+              <img [src]="item.thumb">
+            </div>
             <div class="content">
-              <h5>{{ item.title }}</h5>
+              <h5>{{ item.name }}</h5>
               <div class="label label-orange">
-                <span>Destinasi</span>
-              </div>Admin, {{item.createdate | date : 'd MMM y'}}
+                <span>Agent</span>
+              </div> ,
               <div class="desc">
                 <p>{{item.desc}}</p>
               </div>
               <div class="label-content">
-                <button class="btn" (click)="showDetail(item)">Read</button>
+                <button class="btn" (click)="showDetail(item)">Detail </button>
               </div>
             </div>
           </div>
@@ -35,4 +38,31 @@
       </div>
     </div>
   </div>
-  
+  <div class="col-md-5">
+    <div class="panel">
+        <h2>Agent Perjalanan</h2>
+      <div class="panelBody">
+        <div class="items">
+          <div class="item" *ngFor="let item of Data">
+            <div class="imageCard">
+              <img [src]="item.thumb">
+            </div>
+            <div class="content">
+              <h5>{{ item.name }}</h5>
+              <div class="label label-orange">
+                <span>Agent</span>
+              </div> ,
+              <div class="desc">
+                <p>{{item.desc}}</p>
+              </div>
+              <div class="label-content">
+                <button class="btn" (click)="showDetail(item)">Detail </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+</div>

@@ -71,6 +71,8 @@ export interface role {
 
 
 export interface agent {
+  thumb: string;
+  desc: string;
 
   idagent: number;
 
@@ -96,6 +98,8 @@ export interface agent {
 }
 
 export interface layanan {
+    thumb: string;
+    desc: string;
   idservice: number;
 
   name: string;

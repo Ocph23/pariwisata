@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticleService } from '../article.service';
-import { PanelArticle, article, ArticleType } from 'src/app/models/models.component';
+import { AgentService } from '../article.service';
 import { Router } from '@angular/router';
+import { agent } from 'src/app/models/models.component';
 
 @Component({
   selector: 'app-home-agent',
@@ -9,30 +9,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-agent.component.scss']
 })
 export class HomeAgentComponent implements OnInit {
-  public Data: PanelArticle = { selected: null, datas: [] };
-  source: article[];
-  constructor(public articleService: ArticleService, private router: Router) { }
+ 
+  source: agent[];
+  Data: agent[];
+  constructor(public agentService: AgentService, private router: Router) {
+    
+
+
+
+   }
 
   ngOnInit() {
-    this.articleService.getData(ArticleType.Kuliner).then(x => {
-      this.source = x.datas.filter( x => x.status === 'publish');
-      this.Data = x;
-      this.Data.datas= x.datas.filter( x => x.status === 'publish');
+    this.agentService.get().then(x => {
+      this.source = x;
+      this.Data = this.Data = this.source.copyWithin(this.source.length,1,this.source.length);
     });
   }
 
 
-  showDetail(data: article) {
-    this.articleService.currentArticle = data;
-    this.router.navigate(['/home/detail']);
-  }
+  // showDetail(data: article) {
+  //   this.articleService.currentArticle = data;
+  //   this.router.navigate(['/home/detail']);
+  // }
 
 
   onSearchHandle($event) {
     if ($event) {
-      this.Data.datas = this.source.filter(x => x.title.includes($event) || x.content.includes($event));
+      this.Data = this.source.filter(x => x.name.includes($event) || x.profile.includes($event));
     } else {
-      this.Data.datas = this.source.copyWithin(this.source.length,1,this.source.length);
+      this.Data = this.source.copyWithin(this.source.length,1,this.source.length);
     }
   }
 

@@ -37,3 +37,17 @@ img {
   padding: 20px;
   min-height: 500px;
 }
+
+
+
+.addItem {
+  position: fixed;
+  bottom: 20px !important;
+  right: 30px !important;
+
+  .material-icons {
+    font-size: 40px !important;
+    color: rgb(3, 82, 3);
+    box-shadow: solid 10px gray;
+  }
+}

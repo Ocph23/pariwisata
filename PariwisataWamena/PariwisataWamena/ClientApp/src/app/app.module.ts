@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './home/nav-menu/nav-menu.component';
+import { NavMenuComponent, PesananMenuComponent } from './home/nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { KulinerComponent } from './home/kuliner/kuliner.component';
 import { DestinasiComponent } from './home/destinasi/destinasi.component';
@@ -31,9 +31,7 @@ import { LayananComponent } from './agent/layanan/layanan.component';
 import { TransaksiComponent } from './agent/transaksi/transaksi.component';
 import { AgentProfileComponent } from './agent/profile/profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
-import { ArticleService } from './home/article.service';
-import { AgentAddServiceComponent } from './agent/agent-add-service/agent-add-service.component';
+import { ArticleService, AgentService } from './home/article.service';
 import { BeritaComponent } from './home/berita/berita.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -41,6 +39,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { RegisterComponent } from './authentification/register/register.component';
 import { HomeAgentComponent } from './home/home-agent/home-agent.component';
+import { AddLayananComponent } from './agent/add-layanan/add-layanan.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 @NgModule({
@@ -51,7 +51,7 @@ import { HomeAgentComponent } from './home/home-agent/home-agent.component';
     AdminAkomodasiComponent, AdminAgentComponent, AdminDestinasiComponent, AdminAddArticleComponent,
     AgentComponent, DetailComponent, ModelsComponent, SearchComponent,
     FilterPipe, LayananComponent, TransaksiComponent, AgentProfileComponent, MainPanelComponent,
-    AgentAddServiceComponent, BeritaComponent, RegisterComponent, HomeAgentComponent
+   BeritaComponent, RegisterComponent, HomeAgentComponent, PesananMenuComponent, AddLayananComponent
   ],
 
   imports: [
@@ -102,7 +102,7 @@ import { HomeAgentComponent } from './home/home-agent/home-agent.component';
       }
     ])
   ],
-  providers: [AuthService, ArticleService],
+  providers: [AuthService, ArticleService, AgentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

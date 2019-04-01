@@ -20,8 +20,6 @@ export class LoginComponent implements OnInit {
       'userName': [null, Validators.required],
       'password': [null, Validators.required]
     });
-
-
   }
 
   private message = '';
@@ -50,7 +48,7 @@ export class LoginComponent implements OnInit {
           this.auth.getAgentProfile();
           this.router.navigate(['/agent']);
         } else if (this.auth.IsInRole('tourist')) {
-          this.router.navigate(['/main']);
+          this.router.navigate(['/home/main']);
         } else {
 
         }

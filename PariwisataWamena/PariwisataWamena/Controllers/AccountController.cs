@@ -66,27 +66,25 @@ namespace PariwisataWamena.Controllers {
 
         [AllowAnonymous]
         [HttpPost ("register")]
-        public async Task<IActionResult> Register ([FromBody] User userDto) {
+        public async Task<IActionResult> Register ([FromBody] touris userDto) {
             // map dto to entity
             using (var db = new DbContext ()) {
                 var trans = db.BeginTransaction ();
                 try {
 
-                    var t = new Models.touris();
-                    t.email = userDto.username;
-                    t.name = userDto.name;
-                    t.idtouris= db.Tourist.InsertAndGetLastID (t);
-                    if (t.idtouris <= 0)
-                        throw new System.Exception ();
+                 
 
                     UserService userService = new UserService ();
                     string password = "MyPassword";
-                    User user = await userService.Create (new User { username = t.email, password = password }, password);
+                    User user = await userService.Create (new User { username = userDto.email, password = password }, password);
 
                     if (user == null)
                         throw new System.Exception ("Create User Error");
                     
-                    t.iduser=user.iduser;
+                    userDto.iduser=user.iduser;
+                       userDto.idtouris= db.Tourist.InsertAndGetLastID (userDto);
+                    if (userDto.idtouris <= 0)
+                        throw new System.Exception ();
 
                     string roleName = "tourist";
                     UserRoleServices userRoleService = new UserRoleServices ();
@@ -102,15 +100,17 @@ namespace PariwisataWamena.Controllers {
 
                     var emailService = new EmailServices ();
                     await emailService.SendAsync (new IdentityMessage {
-                        Destination = t.email,
-                            Subject = "Verification Email", Body = $"User Name : {t.email} </br> Password:{password}"
+                        Destination = userDto.email,
+                            Subject = "Verification Email", Body = $"User Name : {userDto.email} </br> Password:{password}"
                     });
 
                     trans.Commit ();
-
-                    return Ok(t);
+                    user.name=userDto.name;
+                    user.roles = await userRoleService.GetUserRoleAsync(user);
+                    return Ok(user);
 
                 } catch (AppException ex) {
+                    trans.Rollback();
                     // return error message if there was an exception
                     return BadRequest (new { message = ex.Message });
                 }

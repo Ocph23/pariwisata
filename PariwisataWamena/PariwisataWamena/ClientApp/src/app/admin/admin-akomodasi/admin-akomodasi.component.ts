@@ -4,7 +4,7 @@ import { article, PanelArticle, ArticleType, IModalResult } from 'src/app/models
 import { ArticleService } from 'src/app/home/article.service';
 import { FormGroup } from '@angular/forms';
 import { AlertService } from 'src/app/alert.service';
-import { SwalComponent } from '@toverux/ngx-sweetalert2';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { AdminAddArticleComponent } from '../admin-add-article/admin-add-article.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 

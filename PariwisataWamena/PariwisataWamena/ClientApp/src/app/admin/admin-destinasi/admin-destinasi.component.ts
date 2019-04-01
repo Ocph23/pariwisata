@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { article, PanelArticle, ArticleType, IModalResult } from 'src/app/models/models.component';
 import { ArticleService } from 'src/app/home/article.service';
 import { AlertService } from 'src/app/alert.service';
-import { SwalComponent } from '@toverux/ngx-sweetalert2';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AdminAddArticleComponent } from '../admin-add-article/admin-add-article.component';

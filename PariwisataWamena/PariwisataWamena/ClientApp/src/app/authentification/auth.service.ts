@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
-import { user } from '../models/models.component';
+import { user, touris } from '../models/models.component';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +29,38 @@ export class AuthService {
       .post<any>(this.baseUrl + 'account/authenticate', user, httpOptions);
   }
 
+
+  
+  register(tourist:touris) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http
+      .post<any>(this.baseUrl + 'account/register', tourist, httpOptions);
+  }
+
+
+
+
+
+
+
   getAgentProfile() {
     return this.http.get<any>(this.baseUrl + 'api/agent/profile', this.getHttpHeader());
   }
 
+  public userName():string{
+    const user = this.storage.getObject('user');
+    if (user != null) {
+      const userName = user.username;
+      return userName;
+    } else {
+      return null;
+    }
+  }
 
   public hasLogin() {
     if (this.getToken() != null) {

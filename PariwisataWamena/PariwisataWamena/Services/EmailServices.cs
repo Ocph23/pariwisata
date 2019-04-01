@@ -42,7 +42,6 @@ namespace PariwisataWamena.Services
             }
             catch (Exception ex)
             {
-
                 throw new SystemException(ex.Message);
             }
 

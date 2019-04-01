@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 export class AgentComponent implements OnInit {
   isExpanded: Boolean;
-  private Datas: any;
+  private Datas: any={name:''};
   constructor(private auth: AuthService, private router: Router) {
     if (!this.auth.IsInRole('agent')) {
       this.router.navigate(['/user/login']);
@@ -22,8 +22,5 @@ export class AgentComponent implements OnInit {
   }
 
   ngOnInit() {
-   
   }
-
-  
 }

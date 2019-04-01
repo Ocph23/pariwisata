@@ -1,0 +1,81 @@
+<div id="login">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 ">
+                <div class="logo">
+                        <h3 class="text-center text-info">Dinas Pariwisata</h3>
+                        <h3 class="text-center text-info">Kab. Jayawijaya </h3>
+                </div>
+        </div>
+        <div id="login-form" class="col-md-7">
+                <h2 class="text-left text-info">Register</h2>
+          <form [formGroup]="registerForm"  class="form" (ngSubmit)="register(registerForm.value)">
+            <div class="form-group">
+              <label for="email" class="text-info">Email:</label><br>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><fa-icon [icon]="['fas','envelope']"></fa-icon></span>
+                </div>
+                <input formControlName='email' type="text"  class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="text-info">Name</label><br>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><fa-icon [icon]="['fas','user']"></fa-icon></span>
+                  </div>
+                  <input formControlName='name' type="text"  class="form-control">
+                </div>
+              </div>
+  
+              <div class="form-group">
+                <label for="gender" class="text-info">Gender</label><br>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><fa-icon  [icon]="['fas','venus-mars']"></fa-icon></span>
+                  </div>
+                  <select formControlName="gender" class="form-control">
+                    <option *ngFor="let gender of genders">
+                         {{gender}}
+                    </option>
+                      </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="address" class="text-info">Address</label><br>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><fa-icon [icon]="['fas','address-card']"></fa-icon></span>
+                  </div>
+                  <textarea formControlName='address' type="text"  class="form-control"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="telepon" class="text-info">Telepon</label><br>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><fa-icon [icon]="['fas','phone-square']"></fa-icon></span>
+                  </div>
+                  <input formControlName='telepon' type="text"  class="form-control">
+                </div>
+              </div>
+
+
+            <ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">{{message}}</ngb-alert>
+            <div class="form-group">
+              <input type="submit" name="submit" class="btn btn-info btn-md" value="Register"
+                [disabled]="!registerForm.valid">
+            </div>
+            <div id="register-link" class="text-right">
+              <a href="/user/login" class="text-info">Login</a>
+            </div>
+          </form>
+        </div>
+      </div>
+  
+    </div>
+  </div>

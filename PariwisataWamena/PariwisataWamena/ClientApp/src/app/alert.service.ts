@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { SwalComponent } from '@toverux/ngx-sweetalert2';
-import swal, { SweetAlertType } from 'sweetalert2';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { SweetAlertType } from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'

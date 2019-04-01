@@ -6,7 +6,7 @@ import { IModalResult, agent } from 'src/app/models/models.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/authentification/auth.service';
-import { SwalComponent } from '@toverux/ngx-sweetalert2';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-profile',
